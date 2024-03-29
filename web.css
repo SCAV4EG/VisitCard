@@ -2,53 +2,44 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #000;
+    overflow: hidden;
 }
 
-header {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-}
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-nav ul li a {
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-nav ul li a:hover {
-    color: #666;
-}
-
-main {
-    padding: 20px;
-}
-
-section {
-    margin-bottom: 40px;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
+.background {
     position: fixed;
-    bottom: 0;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    background-image: url('background.jpg'); /* Замените 'background.jpg' на путь к вашему фоновому изображению */
+    background-size: cover;
+    animation: shake 5s infinite linear;
 }
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(5px) rotate(1deg); }
+    40% { transform: translateX(-5px) rotate(-1deg); }
+    60% { transform: translateX(5px) rotate(1deg); }
+    80% { transform: translateX(-5px) rotate(-1deg); }
+    100% { transform: translateX(0); }
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 24px;
+}
+
