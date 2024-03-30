@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Programmer Terminal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Consolas, monospace;
+            background-color: #000;
+            color: #0f0;
+            overflow: hidden;
+        }
+
+        #terminal-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 80%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 2px solid lime; /* Green border */
+        }
+
+        #terminal {
+            white-space: pre;
+            font-size: 18px;
+            overflow-y: auto;
+            flex-grow: 1; /* Terminal fills available space */
+            width: 100%; /* Terminal takes 100% width */
+        }
+
+        #input-line {
+            display: flex;
+            width: 100%;
+        }
+
+        #input-prompt {
+            color: lime;
+            margin-right: 5px;
+        }
+
+        #user-input {
+            flex-grow: 1; /* Input takes remaining space */
+            border: none;
+            background-color: transparent;
+            color: lime;
+            font-family: Consolas, monospace;
+            font-size: 18px;
+            outline: none; /* Remove outline */
+        }
+
+        #user-input:focus {
+            outline: none; /* Remove outline on focus */
+        }
+
+        .loading-animation {
+            color: lime; /* Set loading animation color */
+            animation: blink 1s infinite;
+            display: inline-block;
+        }
+
+        .friend-button {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 3px 5px;
+            background-color: #333;
+            border: none;
+            color: lime;
+            font-family: Consolas, monospace;
+            font-size: 16px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .friend-button:hover {
+            background-color: #444;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="terminal-container">
+    <div id="terminal">Loading Resources <span id="loading-animation-resources" class="loading-animation"></span><br>
+    Initialization <span id="loading-animation-init" class="loading-animation"></span></div>
+    <div id="input-line">
+        <span id="input-prompt">Terminal > </span>
+        <input id="user-input" type="text" autofocus autocomplete="off">
+    </div>
+</div>
+<script>
+    const terminal = document.getElementById('terminal');
+    const inputPrompt = document.getElementById('input-prompt');
+    const userInput = document.getElementById('user-input');
+    const loadingPhases = [
+        { name: "Loading Resources", progress: 0 },
+        { name: "Initialization", progress: 0 }
+    ];
+
+    userInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            handleUserInput();
+        }
+    });
+
+    function handleUserInput() {
+        const command = userInput.value.trim().toLowerCase();
+        userInput.value = ''; // Clear input
+        terminal.textContent += `\nTerminal > ${command}`; // Echo user input
+        executeCommand(command);
+        terminal.scrollTop = terminal.scrollHeight; // Scroll to bottom
+    }
+
+    function executeCommand(command) {
+        if (command === 'help') {
+            terminal.textContent += '\nAvailable commands:';
+            terminal.textContent += '\n- help: Display available commands';
+            terminal.textContent += '\n- time: Display current time in Moscow, Russia';
+            terminal.textContent += '\n- echo [message]: Display a message';
+            terminal.textContent += '\n- myip: Display your IP address';
+            terminal.textContent += '\n- myfellos: Display list of friends';
+        } else if (command === 'time') {
+            showTime();
+        } else if (command === 'myip') {
+            getMyIPAddress();
+        } else if (command === 'myfellos') {
+            showFriends();
+        } else if (command.startsWith('echo ')) {
+            echoMessage(command.slice(5));
+        } else {
+            terminal.textContent += `\nCommand not recognized: ${command}`;
+        }
+    }
+
+    function showTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        terminal.textContent += `\nCurrent time in Moscow, Russia: ${hours}:${minutes}:${seconds}`;
+    }
+
+    function echoMessage(message) {
+        terminal.textContent += `\n${message}`;
+    }
+
+    function getMyIPAddress() {
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                const ipAddress = data.ip;
+                terminal.textContent += `\nYour IP address is: ${ipAddress}`;
+            })
+            .catch(error => {
+                console.error('Error fetching IP address:', error);
+                terminal.textContent += '\nFailed to fetch IP address';
+            });
+    }
+
+    function showFriends() {
+        terminal.textContent += '\nMy Friends:';
+        terminal.innerHTML += `
+            <button class="friend-button" onclick="openFriendPage('Глеб')">1. Глеб</button>
+            <button class="friend-button" onclick="openFriendPage('Виталий')">2. Витя</button>
+            <button class="friend-button" onclick="openFriendPage('Егор')">3. Жора</button>
+            <button class="friend-button" onclick="openFriendPage('Евгений')">4. Женя</button>
+            <button class="friend-button" onclick="openFriendPage('Матвей')">5. Моня</button>
+        `;
+    }
+
+    function openFriendPage(name) {
+        const friendPages = {
+            'Глеб': 'https://steamcommunity.com/id/RyanGosl1ng',
+            'Виталий': 'https://steamcommunity.com/profiles/76561199096629017',
+            'Егор': 'https://steamcommunity.com/id/4aek4aechek',
+            'Евгений': 'https://steamcommunity.com/profiles/76561198806371179',
+            'Матвей': 'https://steamcommunity.com/id/mtvdlg'
+        };
+        const friendPage = friendPages[name];
+        if (friendPage) {
+            window.open(friendPage, '_blank');
+        } else {
+            terminal.textContent += `\nFriend page not found for ${name}`;
+        }
+    }
+
+    // Simulate loading resources and initialization
+    function simulateLoading() {
+        if (loadingPhases.length > 0) {
+            const phase = loadingPhases.shift();
+            const loadingAnimationElement = document.getElementById(`loading-animation-${phase.name.toLowerCase().replace(" ", "-")}`);
+            if (loadingAnimationElement) {
+                updateLoadingAnimation(loadingAnimationElement, phase);
+            }
+            phase.progress += 10;
+            if (phase.progress > 100) phase.progress = 100;
+            setTimeout(simulateLoading, Math.random() * 500 + 500); // Random delay between 0.5 and 1 second
+        } else {
+            setTimeout(() => {
+                terminal.textContent += '\nInitialization completed.';
+                terminal.textContent += '\nLinks loaded:';
+                terminal.textContent += '\n- https://github.com/SCAV4EG?tab=repositories';
+                terminal.textContent += '\n- Link 2';
+                terminal.textContent += '\n- Link 3';
+                terminal.textContent += '\n- Link 4';
+                terminal.textContent += '\nType "help" for available commands.';
+                inputPrompt.textContent = 'Terminal > ';
+            }, 2000); // Delay for initialization (2 seconds)
+        }
+    }
+
+    function updateLoadingAnimation(element, phase) {
+        const animationText = `[${'■'.repeat(phase.progress / 10)}${'□'.repeat(10 - phase.progress / 10)}] ${phase.progress}%`;
+        animateText(element, animationText);
+    }
+
+    function animateText(element, newText) {
+        let currentIndex = 0;
+        const interval = setInterval(() => {
+            element.textContent = newText.substring(0, currentIndex + 1);
+            currentIndex++;
+            if (currentIndex >= newText.length) {
+                clearInterval(interval);
+            }
+        }, 50); // Animation speed
+    }
+
+    simulateLoading();
+</script>
+</body>
+</html>

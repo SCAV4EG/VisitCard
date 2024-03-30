@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" type="image/png" href="https://avatars.cloudflare.steamstatic.com/1b192e42c933fe0a5f966744c5f0bbfe068c5f23_full.jpg">
+    <meta name="apple-mobile-web-app-title" content="Scav4eg">
+    <link rel="shortcut icon" type="image/x-icon" href="https://avatars.cloudflare.steamstatic.com/1b192e42c933fe0a5f966744c5f0bbfe068c5f23_full.jpg">
+    <link rel="mask-icon" type="image/x-icon" href="https://avatars.cloudflare.steamstatic.com/1b192e42c933fe0a5f966744c5f0bbfe068c5f23_full.jpg" color="#111">
+    <title>Scav4eg</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-weight: 100;
+            background: radial-gradient(#a23982, #1f1013);
+            overflow: hidden;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .terminal {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: black;
+            color: lime;
+            font-size: 1.2em;
+            border-radius: 5px;
+            white-space: pre-line;
+            overflow: hidden;
+            box-shadow: 0 0 20px lime;
+            border: 2px solid lime;
+        }
+
+        .terminal::after {
+            content: '|';
+            animation: blinkCursor 1s infinite;
+        }
+
+        @keyframes blinkCursor {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        button {
+            position: absolute;
+            border: 2px solid white;
+            background: transparent;
+            font-family: 'Roboto', sans-serif;
+            color: white;
+            width: 250px;
+            height: 50px;
+            font-size: 2em;
+            border-radius: 5px;
+            opacity: .5;
+            top: 60vh;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: .3s;
+        }
+
+        button:hover {
+            border: 2px solid #104F55;
+            background-color: rgba(365, 365, 365, 0.5);
+            cursor: pointer;
+            color: #104F55;
+            opacity: .8;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            transition: .3s;
+        }
+
+        .light {
+            position: absolute;
+            width: 0px;
+            opacity: .75;
+            background-color: white;
+            box-shadow: #e9f1f1 0px 0px 20px 2px;
+            opacity: 0;
+            top: 100vh;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            margin: auto;
+        }
+
+        .x1, .x2, .x3, .x4, .x5, .x6, .x7, .x8, .x9 {
+            position: absolute;
+            width: 200%;
+            height: 2px;
+            background: linear-gradient(to right, transparent 50%, white 50%);
+            background-size: 50% 100%;
+            animation: hackerAnimation 5s infinite;
+        }
+
+        .x1 {
+            top: 10%;
+            left: 0;
+        }
+
+        .x2 {
+            top: 30%;
+            left: 0;
+        }
+
+        .x3 {
+            top: 50%;
+            left: 0;
+        }
+
+        .x4 {
+            top: 70%;
+            left: 0;
+        }
+
+        .x5 {
+            top: 90%;
+            left: 0;
+        }
+
+        @keyframes hackerAnimation {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 100% 0;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+        .loading-line {
+            position: absolute;
+            height: 2px;
+            background-color: white;
+            width: 0%;
+            bottom: 0;
+            left: 0;
+            animation: loadingAnimation 5s forwards;
+        }
+
+        @keyframes loadingAnimation {
+            0% {
+                width: 0%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+            }
+            80% {
+                opacity: .9;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes finalFade {
+            0% {
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+            }
+            80% {
+                opacity: .9;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        #footer {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.2em;
+            color: white;
+            position: fixed;
+            transform: translate(95vw, 90vh);
+        }
+    </style>
+</head>
+<body translate="no">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+<div class="terminal">
+    <p>Loading system...</p>
+    <p>Initializing components...<span class="loading-line"></span></p>
+    <p>Establishing connections...<span class="loading-line"></span></p>
+    <p>Launching main program...<span class="loading-line"></span></p>
+    <p>Welcome to Scav4eg's Virtual Environment!</p>
+    <p>Please open terminal by clicking the 'Terminal' button below</p>
+</div>
+<button onclick="startLoading()">Terminal</button>
+<div class="light x1"></div>
+<div class="light x2"></div>
+<div class="light x3"></div>
+<div class="light x4"></div>
+<div class="light x5"></div>
+<div class="light x6"></div>
+<div class="light x7"></div>
+<div class="light x8"></div>
+<div class="light x9"></div>
+<script>
+    function startLoading() {
+        // Анимация загрузки для каждого этапа
+        var lines = document.querySelectorAll('.terminal p');
+        var loadingLines = document.querySelectorAll('.loading-line');
+        lines.forEach(function (line, index) {
+            setTimeout(function () {
+                var loadingLine = loadingLines[index];
+                loadingLine.style.animation = 'loadingAnimation 5s forwards';
+                // Добавление "COMPLETED" после завершения каждого этапа
+                setTimeout(function () {
+                    line.textContent += ' COMPLETED';
+                }, 5000); // 5 секунд для демонстрации
+            }, index * 6000); // Интервал между этапами - 6 секунд для демонстрации
+        });
+
+        // Перенаправление на другую страницу после завершения всех этапов
+        setTimeout(function () {
+            window.location.href = "terminal.html";
+        }, 24000); // Время для завершения всех этапов и перенаправления - 24 секунды для демонстрации
+    }
+</script>
+</body>
+</html>
