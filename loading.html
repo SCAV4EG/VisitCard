@@ -22,16 +22,18 @@
         .loader-container {
             width: 80%;
             max-width: 600px;
+            height: 30px; /* Высота загрузочной полосы */
             background-color: #444; /* Цвет фона панели выполнения */
-            border-radius: 10px;
+            border-radius: 15px; /* Закругленные углы */
             margin-bottom: 20px;
             position: relative;
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.7); /* Эффект свечения */
+            overflow: hidden; /* Скрываем переполнение */
         }
 
         .loader {
-            height: 20px;
-            width: 0;
+            height: 100%; /* Высота индикатора выполнения соответствует высоте контейнера */
+            width: 0; /* Начальная ширина 0 */
             background-color: #00ff00; /* Цвет индикатора выполнения */
             transition: width 0.1s linear; /* Плавное изменение ширины */
         }
@@ -67,7 +69,7 @@
 
         const interval = setInterval(() => {
             progress += 100 / (totalDuration / 100); // Увеличиваем прогресс
-            loader.style.width = progress + '%'; // Устанавливаем ширину загрузочной панели
+            loader.style.width = progress + '%'; // Устанавливаем ширину загрузочной полосы
             percentageText.textContent = Math.floor(progress) + '%'; // Обновляем текст процента
 
             if (progress >= 100) {
