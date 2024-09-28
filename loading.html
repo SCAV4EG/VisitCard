@@ -18,12 +18,16 @@
             overflow: hidden;
         }
 
+        .loading-text {
+            font-size: 20px;
+            margin-bottom: 20px; /* Отступ для загрузочной панели */
+        }
+
         .loader {
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 48px;
-            margin-bottom: 20px;
             position: relative;
             width: 100%;
             max-width: 400px; /* Ограничение ширины панели */
@@ -52,13 +56,10 @@
                 opacity: 1;
             }
         }
-
-        .loading-text {
-            font-size: 20px;
-        }
     </style>
 </head>
 <body>
+    <div class="loading-text">Загрузка. Пожалуйста, ожидайте...</div>
     <div class="loader" id="loader">
         <div class="square" style="animation-delay: 0s;"></div>
         <div class="square" style="animation-delay: 0.1s;"></div>
@@ -71,7 +72,6 @@
         <div class="square" style="animation-delay: 0.8s;"></div>
         <div class="square" style="animation-delay: 0.9s;"></div>
     </div>
-    <div class="loading-text">Загрузка. Пожалуйста, ожидайте...</div>
 
     <script>
         const totalSquares = 10; // Общее количество квадратов
