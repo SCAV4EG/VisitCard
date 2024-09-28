@@ -12,87 +12,67 @@
             align-items: center;
             height: 100vh;
             background: #000;
-            color: #00ff00;
+            color: #00ff4c;
             font-family: 'Courier New', monospace;
             text-align: center;
-            overflow: hidden;
         }
 
         .loading-text {
-            font-size: 20px;
-            margin-bottom: 20px; /* Отступ для загрузочной панели */
+            font-size: 24px;
+            background: #000;
+            border-radius: 50px;
+            padding: 10px;
+            display: inline-block;
         }
 
-        .loader {
-            position: relative;
-            width: 100px; /* Ширина буквы Z */
-            height: 100px; /* Высота буквы Z */
+        .filled {
+            display: inline-block;
+            width: 20px; /* Ширина квадрата */
+            height: 20px; /* Высота квадрата */
+            background-color: #00ff4c; /* Цвет заполненного квадрата */
+            margin: 0 2px; /* Отступ между квадратами */
         }
 
-        .line {
-            position: absolute;
-            background: #00ff00;
-            opacity: 0;
-            animation: loading 1s infinite;
+        .empty {
+            display: inline-block;
+            width: 20px; /* Ширина квадрата */
+            height: 20px; /* Высота квадрата */
+            background-color: #444; /* Цвет пустого квадрата */
+            margin: 0 2px; /* Отступ между квадратами */
         }
-
-        .line1 {
-            width: 100%;
-            height: 10px; /* Толщина линии */
-            top: 0; /* Верхняя линия */
-        }
-
-        .line2 {
-            width: 100%;
-            height: 10px; /* Толщина линии */
-            top: 50%; /* Средняя линия */
-            transform: rotate(45deg); /* Угол наклона для создания Z */
-            transform-origin: left center; /* Установка точки вращения */
-        }
-
-        .line3 {
-            width: 100%;
-            height: 10px; /* Толщина линии */
-            bottom: 0; /* Нижняя линия */
-        }
-
-        /* Анимация для загрузки */
-        @keyframes loading {
-            0% {
-                opacity: 0;
-                transform: translateY(0);
-            }
-            50% {
-                opacity: 1;
-                transform: translateY(-10px);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(0);
-            }
-        }
-        
-        .line1 { animation-delay: 0s; }
-        .line2 { animation-delay: 0.5s; }
-        .line3 { animation-delay: 1s; }
     </style>
 </head>
 <body>
-    <div class="loading-text">Загрузка. Пожалуйста, ожидайте...</div>
-    <div class="loader" id="loader">
-        <div class="line line1"></div>
-        <div class="line line2"></div>
-        <div class="line line3"></div>
+    <div class="loading-text" id="loader">
+        <!-- Квадраты будут добавлены с помощью JavaScript -->
     </div>
 
     <script>
-        const totalLines = 3; // Общее количество линий
-        const totalDuration = 5000; // Длительность загрузки в миллисекундах
-        let completedLines = 0;
+        const totalSquares = 10; // Общее количество квадратов
+        const loader = document.getElementById('loader');
+
+        function updateLoader(progress) {
+            loader.innerHTML = ''; // Очищаем предыдущие квадраты
+            const filledCount = Math.floor((progress / 100) * totalSquares); // Количество заполненных квадратов
+
+            for (let i = 0; i < totalSquares; i++) {
+                if (i < filledCount) {
+                    loader.innerHTML += '<div class="filled"></div>'; // Заполненный квадрат
+                } else {
+                    loader.innerHTML += '<div class="empty"></div>'; // Пустой квадрат
+                }
+            }
+
+            loader.innerHTML +=  ${progress}%; // Добавляем процент загрузки
+        }
+
+        let progress = 0;
 
         const interval = setInterval(() => {
-            completedLines++;
-            if (completedLines >= totalLines) {
+            progress += 10; // Увеличиваем прогресс на 10%
+            updateLoader(progress);
+
+            if (progress >= 100) {
                 clearInterval(interval);
                 setTimeout(() => {
                     const urlParams = new URLSearchParams(window.location.search);
@@ -100,7 +80,7 @@
                     window.location.href = redirectUrl; // Переход
                 }, 500);
             }
-        }, totalDuration / totalLines); // Частота обновления
+        }, 500); // Обновляем каждые 500 мс
     </script>
 </body>
 </html>
