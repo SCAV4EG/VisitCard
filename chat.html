@@ -9,7 +9,6 @@
             font-family: Arial, sans-serif;
         }
         #chat-container {
-            display: none;
             margin-top: 20px;
         }
         #messages {
@@ -24,13 +23,7 @@
     </style>
 </head>
 <body>
-    <h2>Login to Chat</h2>
-    <div id="login-container">
-        <input type="text" id="login" placeholder="Enter login"><br><br>
-        <input type="password" id="password" placeholder="Enter password"><br><br>
-        <button onclick="login()">Login</button>
-        <p id="login-error" style="color:red;"></p>
-    </div>
+    <h2>Chat Application</h2>
 
     <div id="chat-container">
         <h3>Chat</h3>
@@ -42,45 +35,39 @@
     </div>
 
     <script>
-        let users = {};
-
-        // Load users from a text file (asynchronously)
-        fetch('users.txt')
-            .then(response => response.text())
-            .then(text => {
-                text.split('\n').forEach(line => {
-                    const [login, password] = line.split(':');
-                    users[login] = password.trim();
-                });
-            });
-
-        let isAuthenticated = false;
-
-        function login() {
-            const login = document.getElementById('login').value;
-            const password = document.getElementById('password').value;
-            
-            if (users[login] && users[login] === password) {
-                isAuthenticated = true;
-                document.getElementById('login-container').style.display = 'none';
-                document.getElementById('chat-container').style.display = 'block';
-            } else {
-                document.getElementById('login-error').innerText = 'Invalid login or password';
-            }
-        }
-
+        // Функция для отправки сообщения
         function sendMessage() {
-            if (!isAuthenticated) return;
-
             const message = document.getElementById('message').value;
-            const messagesContainer = document.getElementById('messages');
 
-            const newMessage = document.createElement('div');
-            newMessage.innerText = `You: ${message}`;
-            messagesContainer.appendChild(newMessage);
+            if (message === '') return;
 
-            document.getElementById('message').value = '';
+            // Отправка сообщения на сервер через AJAX
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'send_message.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById('message').value = '';  // Очистить поле ввода
+                }
+            };
+            xhr.send('message=' + encodeURIComponent(message));
         }
+
+        // Функция для получения сообщений с сервера
+        function getMessages() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'get_messages.php', true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById('messages').innerHTML = this.responseText;
+                    document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+                }
+            };
+            xhr.send();
+        }
+
+        // Получение сообщений каждые 2 секунды
+        setInterval(getMessages, 2000);
     </script>
 </body>
 </html>
