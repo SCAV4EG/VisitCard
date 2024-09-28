@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
         }
         #chat-container {
+            display: none; /* Чат скрыт до логина */
             margin-top: 20px;
         }
         #messages {
@@ -23,7 +24,14 @@
     </style>
 </head>
 <body>
-    <h2>Chat Application</h2>
+    <h2>Login to Chat</h2>
+
+    <div id="login-container">
+        <input type="text" id="login" placeholder="Enter login"><br><br>
+        <input type="password" id="password" placeholder="Enter password"><br><br>
+        <button onclick="login()">Login</button>
+        <p id="login-error" style="color:red;"></p>
+    </div>
 
     <div id="chat-container">
         <h3>Chat</h3>
@@ -35,13 +43,49 @@
     </div>
 
     <script>
-        // Функция для отправки сообщения
+        let users = {};
+
+        // Загружаем пользователей из текстового файла
+        fetch('users.txt')
+            .then(response => response.text())
+            .then(text => {
+                text.split('\n').forEach(line => {
+                    const [login, password] = line.split(':');
+                    if (login && password) {
+                        users[login.trim()] = password.trim();
+                    }
+                });
+            });
+
+        let isAuthenticated = false;
+
+        // Функция логина
+        function login() {
+            const login = document.getElementById('login').value;
+            const password = document.getElementById('password').value;
+
+            // Проверяем логин и пароль
+            if (users[login] && users[login] === password) {
+                isAuthenticated = true;
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('chat-container').style.display = 'block';
+                // Запускаем получение сообщений после логина
+                getMessages();
+                setInterval(getMessages, 2000); // Получаем сообщения каждые 2 секунды
+            } else {
+                document.getElementById('login-error').innerText = 'Invalid login or password';
+            }
+        }
+
+        // Функция отправки сообщений
         function sendMessage() {
+            if (!isAuthenticated) return; // Проверяем авторизацию
+
             const message = document.getElementById('message').value;
 
             if (message === '') return;
 
-            // Отправка сообщения на сервер через AJAX
+            // Отправляем сообщение на сервер через AJAX
             const xhr = new XMLHttpRequest();
             xhr.open('POST', 'send_message.php', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -65,9 +109,6 @@
             };
             xhr.send();
         }
-
-        // Получение сообщений каждые 2 секунды
-        setInterval(getMessages, 2000);
     </script>
 </body>
 </html>
