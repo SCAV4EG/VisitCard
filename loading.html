@@ -16,22 +16,24 @@
             font-family: 'Courier New', monospace;
             font-size: 24px;
             text-align: center;
+            overflow: hidden; /* Убираем скроллбар */
         }
 
         .loader-container {
             width: 80%;
             max-width: 600px;
-            background-color: #444;
+            background-color: #444; /* Цвет фона панели загрузки */
             border-radius: 10px;
             overflow: hidden;
             margin-bottom: 20px;
             position: relative;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.7); /* Эффект свечения */
         }
 
         .loader {
             height: 20px;
             width: 0;
-            background-color: #00ff00;
+            background-color: #00ff00; /* Цвет загрузочной полосы */
             animation: loading 5s linear forwards;
         }
 
