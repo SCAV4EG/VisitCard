@@ -61,6 +61,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const redirectUrl = urlParams.get('redirect');
 
+        // Переход на другую страницу через 5 секунд
         setTimeout(() => {
             window.location.href = redirectUrl; // Переход через 5 секунд
         }, 5000);
