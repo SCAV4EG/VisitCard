@@ -44,6 +44,7 @@
 </head>
 <body>
     <div class="loading-text" id="loader">
+        <!-- Квадраты будут добавлены с помощью JavaScript -->
     </div>
 
     <script>
@@ -75,7 +76,7 @@
                 clearInterval(interval);
                 setTimeout(() => {
                     const urlParams = new URLSearchParams(window.location.search);
-                    const redirectUrl = urlParams.get('redirect');
+                    const redirectUrl = urlParams.get('redirect') || 'https://example.com'; // URL по умолчанию
                     window.location.href = redirectUrl; // Переход
                 }, 500);
             }
