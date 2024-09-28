@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя Биография</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #000;
+            color: #00ff00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Анимация текста */
+        @keyframes glitch {
+            0% {
+                text-shadow: 2px 2px #00ff00, -2px -2px #ff00ff;
+            }
+            20% {
+                text-shadow: 4px 4px #00ff00, -4px -4px #ff00ff;
+            }
+            40% {
+                text-shadow: 1px 1px #00ff00, -1px -1px #ff00ff;
+            }
+            60% {
+                text-shadow: 5px 5px #00ff00, -5px -5px #ff00ff;
+            }
+            80% {
+                text-shadow: 3px 3px #00ff00, -3px -3px #ff00ff;
+            }
+            100% {
+                text-shadow: 0px 0px #00ff00, 0px 0px #ff00ff;
+            }
+        }
+
+        .bio-container {
+            background: rgba(0, 255, 0, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: glitch 2.5s infinite;
+        }
+
+        .avatar {
+            border-radius: 50%;
+            border: 3px solid #00ff00;
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 28px;
+            letter-spacing: 1px;
+            animation: glitch 2.5s infinite;
+        }
+
+        p {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .links a {
+            color: #00ff00;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 20px;
+            padding: 10px 20px;
+            border: 2px solid #00ff00;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #00ff00;
+            z-index: -1;
+            transition: transform 0.3s ease;
+            transform: translateX(-100%);
+        }
+
+        .links a:hover::before {
+            transform: translateX(0);
+        }
+
+        .links a:hover {
+            background-color: #00ff00;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        /* Анимация фона */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: #000;
+            color: #00ff00;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            overflow: hidden;
+            white-space: pre-wrap;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background" id="code-background"></div>
+    
+    <div class="bio-container">
+        <div class="avatar">
+            <img src="https://avatars.akamai.steamstatic.com/b228a674e012a9207a72236cf8e0acefb024cacd_full.jpg" alt="Avatar">
+        </div>
+        <h1>Ryan Reynolds (aka Scav4eg)</h1>
+        <p>Привет! Я Глеб, любитель игр, хорроров и информационных технологий. В свободное время играю в шутеры, а также увлекаюсь программированием. Добро пожаловать на мою главную страничку!</p>
+        <div class="links">
+            <a href="https://steamcommunity.com/id/RyanReyno1ds/" target="_blank">Steam</a>
+            <a href="https://t.me/Bababoeey1337" target="_blank">Telegram</a>
+            <a href="https://youtube.com/@Scav4eg" target="_blank">YouTube</a>
+        </div>
+    </div>
+
+    <script>
+        const codeLines = [
+            "class Hacker {",
+            "    public static void main(String[] args) {",
+            "        System.out.println('Hello, World!');",
+            "    }",
+            "}"
+        ];
+
+        let currentLine = 0;
+        let currentChar = 0;
+        const backgroundElement = document.getElementById('code-background');
+
+        function typeCode() {
+            if (currentLine < codeLines.length) {
+                if (currentChar < codeLines[currentLine].length) {
+                    backgroundElement.textContent += codeLines[currentLine][currentChar];
+                    currentChar++;
+                } else {
+                    backgroundElement.textContent += '\n';
+                    currentLine++;
+                    currentChar = 0;
+                }
+                setTimeout(typeCode, 100); // Скорость печати символов
+            } else {
+                setTimeout(() => {
+                    backgroundElement.textContent = ""; // Очистка экрана
+                    currentLine = 0;
+                    currentChar = 0;
+                    typeCode(); // Повторить анимацию
+                }, 2000); // Пауза перед повторением
+            }
+        }
+
+        // Начало анимации кода при загрузке страницы
+        window.onload = typeCode;
+    </script>
+
+
+</body>
+</html>
