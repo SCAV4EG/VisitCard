@@ -16,34 +16,33 @@
             font-family: 'Courier New', monospace;
             font-size: 24px;
             text-align: center;
-            overflow: hidden; /* Убираем скроллбар */
+            overflow: hidden;
         }
 
         .loader-container {
             display: flex;
-            align-items: flex-end; /* Выравнивание по нижнему краю */
             justify-content: center;
+            align-items: flex-end;
             width: 80%;
             max-width: 600px;
-            height: 60px; /* Высота контейнера для квадратов */
+            height: 50px; /* Высота контейнера для загрузки */
             margin-bottom: 20px;
-            position: relative;
             border: 2px solid #00ff00; /* Граница контейнера */
-            border-radius: 5px; /* Скругленные углы */
-            background-color: rgba(0, 0, 0, 0.5); /* Фон контейнера */
+            background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
         }
 
         .square {
-            width: 20px; /* Начальная ширина квадрата */
-            height: 20px; /* Начальная высота квадрата */
+            width: 40px; /* Ширина каждого квадрата */
+            height: 40px; /* Высота каждого квадрата */
             background-color: #444; /* Цвет фона неактивных квадратов */
             margin: 0 2px; /* Отступ между квадратами */
-            transition: all 0.3s ease; /* Плавный переход при изменении размеров */
+            transition: all 0.5s ease; /* Плавный переход */
+            opacity: 0.6; /* Прозрачность */
         }
 
         .active {
-            height: 40px; /* Высота активного квадрата */
             background-color: #00ff00; /* Цвет активного квадрата */
+            opacity: 1; /* Полная непрозрачность активных квадратов */
         }
 
         .loading-text {
