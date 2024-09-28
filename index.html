@@ -140,6 +140,17 @@
             padding: 20px;
             filter: blur(2px); /* Блюр для фона */
         }
+
+        /* Сообщение об ошибке */
+        .error-message {
+            font-family: monospace;
+            font-size: 24px;
+            color: #ff0000; /* Красный цвет для сообщения */
+            text-align: center;
+            margin-top: 20px;
+            opacity: 0; /* Скрыто изначально */
+            transition: opacity 0.5s ease; /* Плавный переход */
+        }
     </style>
 </head>
 <body>
@@ -157,6 +168,9 @@
             <a href="https://youtube.com/@Scav4eg" target="_blank">YouTube</a>
         </div>
     </div>
+
+    <!-- Сообщение об ошибке -->
+    <div class="error-message" id="error-message">ACCESS DENIED</div>
 
     <script>
         const codeLines = [
@@ -220,6 +234,7 @@
         let currentLine = 0;
         let currentChar = 0;
         const backgroundElement = document.getElementById('code-background');
+        const errorMessageElement = document.getElementById('error-message');
 
         function typeCode() {
             if (currentLine < codeLines.length) {
@@ -239,6 +254,11 @@
                     currentChar = 0;
                     typeCode(); // Повторить анимацию
                 }, 2000); // Пауза перед повторением
+
+                // Показать сообщение "ACCESS DENIED"
+                setTimeout(() => {
+                    errorMessageElement.style.opacity = 1; // Показать сообщение
+                }, 2500); // Задержка перед показом сообщения
             }
         }
 
