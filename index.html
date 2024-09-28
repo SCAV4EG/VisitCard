@@ -86,40 +86,25 @@
             line-height: 1.5;
         }
 
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #00ff00;
+            text-align: left;
+        }
+
         .links a {
             color: #00ff00;
             text-decoration: none;
-            margin: 0 10px;
-            font-size: 20px;
-            padding: 10px 20px;
-            border: 2px solid #00ff00;
-            display: inline-block;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #00ff00;
-            z-index: -1;
-            transition: transform 0.3s ease;
-            transform: translateX(-100%);
-        }
-
-        .links a:hover::before {
-            transform: translateX(0);
         }
 
         .links a:hover {
-            background-color: #00ff00;
-            color: #000;
-            transform: scale(1.05);
+            text-decoration: underline;
         }
 
         /* Анимация фона */
@@ -138,18 +123,7 @@
             overflow: hidden;
             white-space: pre-wrap;
             padding: 20px;
-            filter: blur(2px); /* Блюр для фона */
-        }
-
-        /* Сообщение об ошибке */
-        .error-message {
-            font-family: monospace;
-            font-size: 24px;
-            color: #ff0000; /* Красный цвет для сообщения */
-            text-align: center;
-            margin-top: 20px;
-            opacity: 0; /* Скрыто изначально */
-            transition: opacity 0.5s ease; /* Плавный переход */
+            filter: blur(0.5px); /* Более заметное размытие */
         }
     </style>
 </head>
@@ -162,15 +136,29 @@
         </div>
         <h1>Ryan Reynolds (aka Scav4eg)</h1>
         <p>Привет! Я Глеб, любитель игр, хорроров и информационных технологий. В свободное время играю в шутеры, а также увлекаюсь программированием. Добро пожаловать на мою главную страничку!</p>
-        <div class="links">
-            <a href="https://steamcommunity.com/id/RyanReyno1ds/" target="_blank">Steam</a>
-            <a href="https://t.me/Bababoeey1337" target="_blank">Telegram</a>
-            <a href="https://youtube.com/@Scav4eg" target="_blank">YouTube</a>
-        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Соц. Сети</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="https://t.me/Bababoeey1337" target="_blank">Telegram</a></td>
+                </tr>
+                <tr>
+                    <td><a href="https://steamcommunity.com/id/RyanReyno1ds/" target="_blank">Steam</a></td>
+                </tr>
+                <tr>
+                    <td><a href="https://youtube.com/@Scav4eg" target="_blank">YouTube</a></td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.twitch.tv/your_twitch_username" target="_blank">Twitch</a></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
-    <!-- Сообщение об ошибке -->
-    <div class="error-message" id="error-message">ACCESS DENIED</div>
 
     <script>
         const codeLines = [
@@ -234,7 +222,6 @@
         let currentLine = 0;
         let currentChar = 0;
         const backgroundElement = document.getElementById('code-background');
-        const errorMessageElement = document.getElementById('error-message');
 
         function typeCode() {
             if (currentLine < codeLines.length) {
@@ -246,7 +233,7 @@
                     currentLine++;
                     currentChar = 0;
                 }
-                setTimeout(typeCode, 64); // Увеличенная скорость печати
+                setTimeout(typeCode, 80); // Увеличенная скорость печати
             } else {
                 setTimeout(() => {
                     backgroundElement.textContent = ""; // Очистка экрана
@@ -254,11 +241,6 @@
                     currentChar = 0;
                     typeCode(); // Повторить анимацию
                 }, 2000); // Пауза перед повторением
-
-                // Показать сообщение "ACCESS DENIED"
-                setTimeout(() => {
-                    errorMessageElement.style.opacity = 1; // Показать сообщение
-                }, 2500); // Задержка перед показом сообщения
             }
         }
 
