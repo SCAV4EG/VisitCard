@@ -20,32 +20,26 @@
         }
 
         .loader-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 80%;
             max-width: 600px;
-            height: 30px; /* Высота загрузочной полосы */
-            background-color: #444; /* Цвет фона панели выполнения */
-            border-radius: 15px; /* Закругленные углы */
+            height: 40px; /* Высота контейнера для квадратов */
             margin-bottom: 20px;
             position: relative;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.7); /* Эффект свечения */
-            overflow: hidden; /* Скрываем переполнение */
         }
 
-        .loader {
-            height: 100%; /* Высота индикатора выполнения соответствует высоте контейнера */
-            width: 0; /* Начальная ширина 0 */
-            background-color: #00ff00; /* Цвет индикатора выполнения */
-            transition: width 0.1s linear; /* Плавное изменение ширины */
+        .square {
+            width: 30px; /* Ширина квадрата */
+            height: 30px; /* Высота квадрата */
+            background-color: #444; /* Цвет фона неактивных квадратов */
+            margin: 0 2px; /* Отступ между квадратами */
+            transition: background-color 0.2s ease; /* Плавный переход цвета */
         }
 
-        .percentage {
-            position: absolute;
-            width: 100%;
-            text-align: center;
-            top: 50%;
-            transform: translateY(-50%);
-            font-weight: bold;
-            font-size: 18px;
+        .active {
+            background-color: #00ff00; /* Цвет активного квадрата */
         }
 
         .loading-text {
@@ -55,24 +49,30 @@
     </style>
 </head>
 <body>
-    <div class="loader-container">
-        <div class="loader" id="loader"></div>
-        <div class="percentage" id="percentage">0%</div>
-    </div>
+    <div class="loader-container" id="loader-container"></div>
     <div class="loading-text">Загрузка. Пожалуйста, ожидайте...</div>
 
     <script>
-        const loader = document.getElementById('loader');
-        const percentageText = document.getElementById('percentage');
+        const loaderContainer = document.getElementById('loader-container');
+        const totalSquares = 10; // Всего квадратов (по 10% каждый)
         const totalDuration = 5000; // Длительность загрузки в миллисекундах
-        let progress = 0;
+        let completedSquares = 0;
+
+        // Создание квадратов
+        for (let i = 0; i < totalSquares; i++) {
+            const square = document.createElement('div');
+            square.className = 'square';
+            loaderContainer.appendChild(square);
+        }
 
         const interval = setInterval(() => {
-            progress += 100 / (totalDuration / 100); // Увеличиваем прогресс
-            loader.style.width = progress + '%'; // Устанавливаем ширину загрузочной полосы
-            percentageText.textContent = Math.floor(progress) + '%'; // Обновляем текст процента
+            if (completedSquares < totalSquares) {
+                const squares = loaderContainer.getElementsByClassName('square');
+                squares[completedSquares].classList.add('active'); // Активируем квадрат
+                completedSquares++;
+            }
 
-            if (progress >= 100) {
+            if (completedSquares >= totalSquares) {
                 clearInterval(interval);
                 // Переход на другую страницу через 0.5 секунды
                 setTimeout(() => {
@@ -81,7 +81,7 @@
                     window.location.href = redirectUrl; // Переход
                 }, 500);
             }
-        }, 100); // Обновление каждые 100 мс
+        }, totalDuration / totalSquares); // Загрузка квадратов
     </script>
 </body>
 </html>
