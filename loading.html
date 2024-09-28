@@ -19,59 +19,33 @@
             overflow: hidden;
         }
 
-        .loader-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            width: 80%;
-            max-width: 600px;
-            height: 50px; /* Высота контейнера для загрузки */
+        .loader {
+            font-size: 48px; /* Размер шрифта для загрузки */
             margin-bottom: 20px;
-            border: 2px solid #00ff00; /* Граница контейнера */
-            background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
-        }
-
-        .square {
-            width: 40px; /* Ширина каждого квадрата */
-            height: 40px; /* Высота каждого квадрата */
-            background-color: #444; /* Цвет фона неактивных квадратов */
-            margin: 0 2px; /* Отступ между квадратами */
-            transition: all 0.5s ease; /* Плавный переход */
-            opacity: 0.6; /* Прозрачность */
-        }
-
-        .active {
-            background-color: #00ff00; /* Цвет активного квадрата */
-            opacity: 1; /* Полная непрозрачность активных квадратов */
         }
 
         .loading-text {
-            margin-top: 10px;
             font-size: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="loader-container" id="loader-container"></div>
+    <div class="loader" id="loader">[□□□□□□□□□□] 0%</div>
     <div class="loading-text">Загрузка. Пожалуйста, ожидайте...</div>
 
     <script>
-        const loaderContainer = document.getElementById('loader-container');
+        const loader = document.getElementById('loader');
         const totalSquares = 10; // Всего квадратов (по 10% каждый)
         const totalDuration = 5000; // Длительность загрузки в миллисекундах
         let completedSquares = 0;
 
-        // Создание квадратов
-        for (let i = 0; i < totalSquares; i++) {
-            const square = document.createElement('div');
-            square.className = 'square';
-            loaderContainer.appendChild(square);
-        }
-
         const interval = setInterval(() => {
             if (completedSquares < totalSquares) {
-                const squares = loaderContainer.getElementsByClassName('square');
-                squares[completedSquares].classList.add('active'); // Активируем квадрат
+                // Обновляем строку загрузки
+                const filledSquares = '■'.repeat(completedSquares);
+                const emptySquares = '□'.repeat(totalSquares - completedSquares);
+                const percentage = Math.round((completedSquares / totalSquares) * 100);
+                loader.textContent = `[${filledSquares}${emptySquares}] ${percentage}%`; // Обновление текста загрузки
                 completedSquares++;
             }
 
