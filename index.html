@@ -138,17 +138,12 @@
             overflow: hidden;
             white-space: pre-wrap;
             padding: 20px;
-            filter: blur(0.5px); /* Более заметное размытие */
-        }
-
-        /* Размытие текста кода */
-        .code-blur {
-            filter: blur(2px); /* Размытие текста кода */
+            filter: blur(2px); /* Блюр для фона */
         }
     </style>
 </head>
 <body>
-    <div class="background code-blur" id="code-background"></div>
+    <div class="background" id="code-background"></div>
     
     <div class="bio-container">
         <div class="avatar">
@@ -236,7 +231,7 @@
                     currentLine++;
                     currentChar = 0;
                 }
-                setTimeout(typeCode, 80); // Увеличенная скорость печати
+                setTimeout(typeCode, 64); // Увеличенная скорость печати
             } else {
                 setTimeout(() => {
                     backgroundElement.textContent = ""; // Очистка экрана
