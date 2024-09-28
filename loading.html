@@ -14,14 +14,15 @@
             background: #000;
             color: #00ff00;
             font-family: 'Courier New', monospace;
-            font-size: 24px;
+            font-size: 48px; /* Размер шрифта для загрузки */
             text-align: center;
             overflow: hidden;
         }
 
         .loader {
-            font-size: 48px; /* Размер шрифта для загрузки */
             margin-bottom: 20px;
+            white-space: nowrap; /* Запрет на перенос строк */
+            overflow: hidden; /* Скрытие лишнего */
         }
 
         .loading-text {
@@ -30,35 +31,38 @@
     </style>
 </head>
 <body>
-    <div class="loader" id="loader">[□□□□□□□□□□] 0%</div>
+    <div class="loader" id="loader">◢◤◢◤◢◤◢◤◢◤◢◤◢◤</div>
     <div class="loading-text">Загрузка. Пожалуйста, ожидайте...</div>
 
     <script>
         const loader = document.getElementById('loader');
-        const totalSquares = 10; // Всего квадратов (по 10% каждый)
+        const totalSquares = 10; // Общее количество символов
         const totalDuration = 5000; // Длительность загрузки в миллисекундах
         let completedSquares = 0;
 
         const interval = setInterval(() => {
-            if (completedSquares < totalSquares) {
-                // Обновляем строку загрузки
-                const filledSquares = '■'.repeat(completedSquares);
-                const emptySquares = '□'.repeat(totalSquares - completedSquares);
-                const percentage = Math.round((completedSquares / totalSquares) * 100);
-                loader.textContent = `[${filledSquares}${emptySquares}] ${percentage}%`; // Обновление текста загрузки
-                completedSquares++;
+            // Цикл для анимации символов
+            loader.textContent = '';
+
+            for (let i = 0; i < totalSquares; i++) {
+                if (i < completedSquares) {
+                    loader.textContent += '◢'; // Заполненный квадрат
+                } else {
+                    loader.textContent += '◤'; // Пустой квадрат
+                }
             }
 
+            completedSquares = (completedSquares + 1) % (totalSquares + 1); // Увеличиваем прогресс
+            const percentage = Math.round((completedSquares / totalSquares) * 100);
             if (completedSquares >= totalSquares) {
                 clearInterval(interval);
-                // Переход на другую страницу через 0.5 секунды
                 setTimeout(() => {
                     const urlParams = new URLSearchParams(window.location.search);
                     const redirectUrl = urlParams.get('redirect');
                     window.location.href = redirectUrl; // Переход
                 }, 500);
             }
-        }, totalDuration / totalSquares); // Загрузка квадратов
+        }, totalDuration / totalSquares); // Частота обновления
     </script>
 </body>
 </html>
