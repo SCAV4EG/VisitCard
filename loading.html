@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Загрузка...</title>
+    <title>Индикатор Выполнения...</title>
     <style>
         body {
             display: flex;
@@ -22,7 +22,7 @@
         .loader-container {
             width: 80%;
             max-width: 600px;
-            background-color: #444; /* Цвет фона панели загрузки */
+            background-color: #444; /* Цвет фона панели выполнения */
             border-radius: 10px;
             overflow: hidden;
             margin-bottom: 20px;
@@ -33,7 +33,7 @@
         .loader {
             height: 20px;
             width: 0;
-            background-color: #00ff00; /* Цвет загрузочной полосы */
+            background-color: #00ff00; /* Цвет индикатора выполнения */
             animation: loading 5s linear forwards;
         }
 
@@ -51,6 +51,19 @@
             font-weight: bold;
             font-size: 18px;
         }
+
+        .completion-text {
+            margin-top: 20px;
+            font-size: 20px;
+            opacity: 0; /* Начальное значение для анимации */
+            animation: fadeIn 5s forwards; /* Появление текста через 5 секунд */
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -58,6 +71,7 @@
         <div class="loader"></div>
         <div class="loading-text">Пожалуйста, подождите...</div>
     </div>
+    <div class="completion-text">Загрузка завершена!</div> <!-- Текст завершения -->
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
