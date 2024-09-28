@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #chat-container {
+            display: none;
+            margin-top: 20px;
+        }
+        #messages {
+            border: 1px solid #ccc;
+            height: 300px;
+            overflow-y: scroll;
+            padding: 10px;
+        }
+        #message-input {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Login to Chat</h2>
+    <div id="login-container">
+        <input type="text" id="login" placeholder="Enter login"><br><br>
+        <input type="password" id="password" placeholder="Enter password"><br><br>
+        <button onclick="login()">Login</button>
+        <p id="login-error" style="color:red;"></p>
+    </div>
+
+    <div id="chat-container">
+        <h3>Chat</h3>
+        <div id="messages"></div>
+        <div id="message-input">
+            <input type="text" id="message" placeholder="Type a message">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        let users = {};
+
+        // Load users from a text file (asynchronously)
+        fetch('users.txt')
+            .then(response => response.text())
+            .then(text => {
+                text.split('\n').forEach(line => {
+                    const [login, password] = line.split(':');
+                    users[login] = password.trim();
+                });
+            });
+
+        let isAuthenticated = false;
+
+        function login() {
+            const login = document.getElementById('login').value;
+            const password = document.getElementById('password').value;
+            
+            if (users[login] && users[login] === password) {
+                isAuthenticated = true;
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('chat-container').style.display = 'block';
+            } else {
+                document.getElementById('login-error').innerText = 'Invalid login or password';
+            }
+        }
+
+        function sendMessage() {
+            if (!isAuthenticated) return;
+
+            const message = document.getElementById('message').value;
+            const messagesContainer = document.getElementById('messages');
+
+            const newMessage = document.createElement('div');
+            newMessage.innerText = `You: ${message}`;
+            messagesContainer.appendChild(newMessage);
+
+            document.getElementById('message').value = '';
+        }
+    </script>
+</body>
+</html>
