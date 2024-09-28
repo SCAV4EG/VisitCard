@@ -138,7 +138,7 @@
             overflow: hidden;
             white-space: pre-wrap;
             padding: 20px;
-            filter: blur(0.25px);
+            filter: blur(0.5px); /* Более заметное размытие */
         }
     </style>
 </head>
@@ -160,21 +160,59 @@
 
     <script>
         const codeLines = [
-            "class Hacker {",
-            "    public static void main(String[] args) {",
-            "        // Sample large code block",
-            "        String hackerName = \"Scav4eg\";",
-            "        String favoriteLang = \"C#\";",
-            "        System.out.println(\"Welcome to the coding world!\");",
-            "        // Simulation of a complex process",
-            "        for (int i = 0; i < 10; i++) {",
-            "            System.out.println(\"Iteration: \" + i);",
+            "class AuthService {",
+            "    public boolean authenticateUser(String username, String password) {",
+            "        User user = database.findUser(username);",
+            "        if (user != null && user.checkPassword(password)) {",
+            "            createSession(user);",
+            "            return true;",
             "        }",
-            "        int encryptionKey = generateEncryptionKey();",
-            "        System.out.println(\"Key generated: \" + encryptionKey);",
+            "        return false;",
             "    }",
-            "    public static int generateEncryptionKey() {",
-            "        return 42; // Simplified for demo",
+            "",
+            "    private void createSession(User user) {",
+            "        Session session = new Session(user);",
+            "        session.setExpirationTime(System.currentTimeMillis() + 3600000);",
+            "        sessionManager.addSession(session);",
+            "    }",
+            "}",
+            "",
+            "class User {",
+            "    private String username;",
+            "    private String passwordHash;",
+            "",
+            "    public boolean checkPassword(String password) {",
+            "        return PasswordUtil.verifyHash(password, this.passwordHash);",
+            "    }",
+            "}",
+            "",
+            "public class LoginController {",
+            "    private AuthService authService;",
+            "",
+            "    public LoginController() {",
+            "        this.authService = new AuthService();",
+            "    }",
+            "",
+            "    public void login(String username, String password) {",
+            "        boolean success = authService.authenticateUser(username, password);",
+            "        if (success) {",
+            "            System.out.println(\"ACCESS GRANTED\");",
+            "        } else {",
+            "            System.out.println(\"ACCES DENIED\");",
+            "        }",
+            "    }",
+            "}",
+            "",
+            "public class SessionKeyGenerator {",
+            "    public static String generateKey() {",
+            "        return UUID.randomUUID().toString();",
+            "    }",
+            "}",
+            "",
+            "public class Main {",
+            "    public static void main(String[] args) {",
+            "        LoginController loginController = new LoginController();",
+            "        loginController.login(\"Scav4eg\", \"SuperSecretPassword\");",
             "    }",
             "}"
         ];
@@ -204,7 +242,6 @@
             }
         }
 
-        // Начало анимации кода при загрузке страницы
         window.onload = typeCode;
     </script>
 
