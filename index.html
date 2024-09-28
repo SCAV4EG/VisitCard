@@ -86,25 +86,40 @@
             line-height: 1.5;
         }
 
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 10px;
-            border: 1px solid #00ff00;
-            text-align: left;
-        }
-
         .links a {
             color: #00ff00;
             text-decoration: none;
+            margin: 0 10px;
+            font-size: 20px;
+            padding: 10px 20px;
+            border: 2px solid #00ff00;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #00ff00;
+            z-index: -1;
+            transition: transform 0.3s ease;
+            transform: translateX(-100%);
+        }
+
+        .links a:hover::before {
+            transform: translateX(0);
         }
 
         .links a:hover {
-            text-decoration: underline;
+            background-color: #00ff00;
+            color: #000;
+            transform: scale(1.05);
         }
 
         /* Анимация фона */
@@ -136,28 +151,12 @@
         </div>
         <h1>Ryan Reynolds (aka Scav4eg)</h1>
         <p>Привет! Я Глеб, любитель игр, хорроров и информационных технологий. В свободное время играю в шутеры, а также увлекаюсь программированием. Добро пожаловать на мою главную страничку!</p>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Соц. Сети</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><a href="https://t.me/Bababoeey1337" target="_blank">Telegram</a></td>
-                </tr>
-                <tr>
-                    <td><a href="https://steamcommunity.com/id/RyanReyno1ds/" target="_blank">Steam</a></td>
-                </tr>
-                <tr>
-                    <td><a href="https://youtube.com/@Scav4eg" target="_blank">YouTube</a></td>
-                </tr>
-                <tr>
-                    <td><a href="https://www.twitch.tv/your_twitch_username" target="_blank">Twitch</a></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="links">
+            <a href="#" onclick="redirectTo('https://steamcommunity.com/id/RyanReyno1ds/')">Steam</a>
+            <a href="#" onclick="redirectTo('https://t.me/Bababoeey1337')">Telegram</a>
+            <a href="#" onclick="redirectTo('https://youtube.com/@Scav4eg')">YouTube</a>
+            <a href="#" onclick="redirectTo('https://www.twitch.tv/scav4eg')">Twitch</a>
+        </div>
     </div>
 
     <script>
@@ -242,6 +241,11 @@
                     typeCode(); // Повторить анимацию
                 }, 2000); // Пауза перед повторением
             }
+        }
+
+        function redirectTo(url) {
+            // Переход на страницу загрузки
+            window.location.href = 'loading.html?redirect=' + encodeURIComponent(url);
         }
 
         window.onload = typeCode;
