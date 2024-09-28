@@ -140,10 +140,15 @@
             padding: 20px;
             filter: blur(0.5px); /* Более заметное размытие */
         }
+
+        /* Размытие текста кода */
+        .code-blur {
+            filter: blur(2px); /* Размытие текста кода */
+        }
     </style>
 </head>
 <body>
-    <div class="background" id="code-background"></div>
+    <div class="background code-blur" id="code-background"></div>
     
     <div class="bio-container">
         <div class="avatar">
@@ -198,7 +203,7 @@
             "        if (success) {",
             "            System.out.println(\"ACCESS GRANTED\");",
             "        } else {",
-            "            System.out.println(\"ACCES DENIED\");",
+            "            System.out.println(\"ACCESS DENIED\");",
             "        }",
             "    }",
             "}",
