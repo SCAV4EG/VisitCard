@@ -138,6 +138,7 @@
             overflow: hidden;
             white-space: pre-wrap;
             padding: 20px;
+            filter: blur(0.25px);
         }
     </style>
 </head>
@@ -161,7 +162,19 @@
         const codeLines = [
             "class Hacker {",
             "    public static void main(String[] args) {",
-            "        System.out.println('Hello, World!');",
+            "        // Sample large code block",
+            "        String hackerName = \"Scav4eg\";",
+            "        String favoriteLang = \"C#\";",
+            "        System.out.println(\"Welcome to the coding world!\");",
+            "        // Simulation of a complex process",
+            "        for (int i = 0; i < 10; i++) {",
+            "            System.out.println(\"Iteration: \" + i);",
+            "        }",
+            "        int encryptionKey = generateEncryptionKey();",
+            "        System.out.println(\"Key generated: \" + encryptionKey);",
+            "    }",
+            "    public static int generateEncryptionKey() {",
+            "        return 42; // Simplified for demo",
             "    }",
             "}"
         ];
@@ -180,7 +193,7 @@
                     currentLine++;
                     currentChar = 0;
                 }
-                setTimeout(typeCode, 100); // Скорость печати символов
+                setTimeout(typeCode, 80); // Увеличенная скорость печати
             } else {
                 setTimeout(() => {
                     backgroundElement.textContent = ""; // Очистка экрана
@@ -194,7 +207,6 @@
         // Начало анимации кода при загрузке страницы
         window.onload = typeCode;
     </script>
-
 
 </body>
 </html>
