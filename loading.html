@@ -39,20 +39,21 @@
         .line1 {
             width: 100%;
             height: 10px; /* Толщина линии */
-            top: 0;
+            top: 0; /* Верхняя линия */
         }
 
         .line2 {
             width: 100%;
             height: 10px; /* Толщина линии */
-            top: 50%;
-            transform: rotate(45deg);
+            top: 50%; /* Средняя линия */
+            transform: rotate(45deg); /* Угол наклона для создания Z */
+            transform-origin: left center; /* Установка точки вращения */
         }
 
         .line3 {
             width: 100%;
             height: 10px; /* Толщина линии */
-            bottom: 0;
+            bottom: 0; /* Нижняя линия */
         }
 
         /* Анимация для загрузки */
