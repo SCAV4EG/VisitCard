@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
+<html lang="ru"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная страница</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -24,31 +22,26 @@
             position: relative;
         }
 
+        /* Анимация текста */
         @keyframes glitch {
-            0% { text-shadow: 2px 2px #00ff00, -2px -2px #ff00ff; }
-            20% { text-shadow: 4px 4px #00ff00, -4px -4px #ff00ff; }
-            40% { text-shadow: 1px 1px #00ff00, -1px -1px #ff00ff; }
-            60% { text-shadow: 5px 5px #00ff00, -5px -5px #ff00ff; }
-            80% { text-shadow: 3px 3px #00ff00, -3px -3px #ff00ff; }
-            100% { text-shadow: 0px 0px #00ff00, 0px 0px #ff00ff; }
-        }
-
-        @keyframes code-flow {
-            from { background-position: 0 0; }
-            to { background-position: 0 100%; }
-        }
-
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/circuit-board.png');
-            opacity: 0.3;
-            z-index: 0;
-            animation: code-flow 10s linear infinite;
+            0% {
+                text-shadow: 2px 2px #00ff00, -2px -2px #ff00ff;
+            }
+            20% {
+                text-shadow: 4px 4px #00ff00, -4px -4px #ff00ff;
+            }
+            40% {
+                text-shadow: 1px 1px #00ff00, -1px -1px #ff00ff;
+            }
+            60% {
+                text-shadow: 5px 5px #00ff00, -5px -5px #ff00ff;
+            }
+            80% {
+                text-shadow: 3px 3px #00ff00, -3px -3px #ff00ff;
+            }
+            100% {
+                text-shadow: 0px 0px #00ff00, 0px 0px #ff00ff;
+            }
         }
 
         .bio-container {
@@ -58,6 +51,7 @@
             box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
             max-width: 500px;
             text-align: center;
+            position: relative;
             z-index: 1;
             animation: glitch 2.5s infinite;
         }
@@ -79,22 +73,24 @@
         }
 
         h1 {
-            font-size: 28px;
             margin-bottom: 10px;
+            font-size: 28px;
+            letter-spacing: 1px;
             animation: glitch 2.5s infinite;
         }
 
         p {
             margin-bottom: 20px;
+            line-height: 1.5;
         }
 
         .links a {
             color: #00ff00;
             text-decoration: none;
+            margin: 0 10px;
             font-size: 20px;
             padding: 10px 20px;
             border: 2px solid #00ff00;
-            margin: 5px;
             display: inline-block;
             transition: background-color 0.3s ease, transform 0.3s ease;
             position: relative;
@@ -121,11 +117,83 @@
         .links a:hover {
             background-color: #00ff00;
             color: #000;
-            transform: scale(1.1);
+            transform: scale(1.05);
+        }
+
+        /* Анимация фона */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: #000;
+            color: #00ff00;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            overflow: hidden;
+            white-space: pre-wrap;
+            padding: 20px;
+            filter: blur(2px); /* Увеличенное размытие */
         }
     </style>
 </head>
 <body>
+    <div class="background" id="code-background">class AuthService {
+    public boolean authenticateUser(String username, String password) {
+        User user = database.findUser(username);
+        if (user != null &amp;&amp; user.checkPassword(password)) {
+            createSession(user);
+            return true;
+        }
+        return false;
+    }
+
+    private void createSession(User user) {
+        Session session = new Session(user);
+        session.setExpirationTime(System.currentTimeMillis() + 3600000);
+        sessionManager.addSession(session);
+    }
+}
+
+class User {
+    private String username;
+    private String passwordHash;
+
+    public boolean checkPassword(String password) {
+        return PasswordUtil.verifyHash(password, this.passwordHash);
+    }
+}
+
+public class LoginController {
+    private AuthService authService;
+
+    public LoginController() {
+        this.authService = new AuthService();
+    }
+
+    public void login(String username, String password) {
+        boolean success = authService.authenticateUser(username, password);
+        if (success) {
+            System.out.println("ACCESS GRANTED");
+        } else {
+            System.out.println("ACCESS DENIED");
+        }
+    }
+}
+
+public class SessionKeyGenerator {
+    public static String generateKey() {
+        return UUID.randomUUID().toString();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LoginController l</div>
+    
     <div class="bio-container">
         <div class="avatar">
             <img src="https://avatars.akamai.steamstatic.com/b228a674e012a9207a72236cf8e0acefb024cacd_full.jpg" alt="Avatar">
@@ -133,30 +201,106 @@
         <h1>Ryan Reynolds (aka Scav4eg)</h1>
         <p>Привет! Я ебарь мам!</p>
         <div class="links">
-            <a href="https://steamcommunity.com/id/RyanReyno1ds/">Steam</a>
-            <a href="https://t.me/Gleb4eg1337">Telegram</a>
-            <a href="https://youtube.com/@Scav4eg">YouTube</a>
-            <a href="terminal.html">Terminal</a>
-            <a href="https://www.twitch.tv/scav4eg">Twitch</a>
-            <a href="https://webchat-chvw.onrender.com">WebChat</a>
-        </div>
+            <a href="#" onclick="redirectTo('https://steamcommunity.com/id/RyanReyno1ds/')">Steam</a>
+            <a href="#" onclick="redirectTo('https://t.me/Gleb4eg1337')">Telegram</a>
+            <a href="#" onclick="redirectTo('https://youtube.com/@Scav4eg')">YouTube</a>
+            <a href="#" onclick="redirectTo('terminal.html')">Terminal</a>
+            <a href="#" onclick="redirectTo('https://www.twitch.tv/scav4eg')">Twitch</a>
+            <a href="#" onclick="redirectTo('https://webchat-chvw.onrender.com')">WebChat</a></div>
     </div>
 
-    <audio id="click-sound" src="open.wav"></audio>
-    <audio id="hover-sound" src="select.wav"></audio>
-
     <script>
-        function playSound(soundId) {
-            const sound = document.getElementById(soundId);
-            sound.currentTime = 0;
-            sound.play();
+        const codeLines = [
+            "class AuthService {",
+            "    public boolean authenticateUser(String username, String password) {",
+            "        User user = database.findUser(username);",
+            "        if (user != null && user.checkPassword(password)) {",
+            "            createSession(user);",
+            "            return true;",
+            "        }",
+            "        return false;",
+            "    }",
+            "",
+            "    private void createSession(User user) {",
+            "        Session session = new Session(user);",
+            "        session.setExpirationTime(System.currentTimeMillis() + 3600000);",
+            "        sessionManager.addSession(session);",
+            "    }",
+            "}",
+            "",
+            "class User {",
+            "    private String username;",
+            "    private String passwordHash;",
+            "",
+            "    public boolean checkPassword(String password) {",
+            "        return PasswordUtil.verifyHash(password, this.passwordHash);",
+            "    }",
+            "}",
+            "",
+            "public class LoginController {",
+            "    private AuthService authService;",
+            "",
+            "    public LoginController() {",
+            "        this.authService = new AuthService();",
+            "    }",
+            "",
+            "    public void login(String username, String password) {",
+            "        boolean success = authService.authenticateUser(username, password);",
+            "        if (success) {",
+            "            System.out.println(\"ACCESS GRANTED\");",
+            "        } else {",
+            "            System.out.println(\"ACCESS DENIED\");",
+            "        }",
+            "    }",
+            "}",
+            "",
+            "public class SessionKeyGenerator {",
+            "    public static String generateKey() {",
+            "        return UUID.randomUUID().toString();",
+            "    }",
+            "}",
+            "",
+            "public class Main {",
+            "    public static void main(String[] args) {",
+            "        LoginController loginController = new LoginController();",
+            "        loginController.login(\"Scav4eg\", \"SuperSecretPassword\");",
+            "    }",
+            "}"
+        ];
+
+        let currentLine = 0;
+        let currentChar = 0;
+        const backgroundElement = document.getElementById('code-background');
+
+        function typeCode() {
+            if (currentLine < codeLines.length) {
+                if (currentChar < codeLines[currentLine].length) {
+                    backgroundElement.textContent += codeLines[currentLine][currentChar];
+                    currentChar++;
+                } else {
+                    backgroundElement.textContent += '\n';
+                    currentLine++;
+                    currentChar = 0;
+                }
+                setTimeout(typeCode, 80); // Увеличенная скорость печати
+            } else {
+                setTimeout(() => {
+                    backgroundElement.textContent = ""; // Очистка экрана
+                    currentLine = 0;
+                    currentChar = 0;
+                    typeCode(); // Повторить анимацию
+                }, 2000); // Пауза перед повторением
+            }
         }
 
-document.querySelectorAll('.links a').forEach(link => {
-    link.addEventListener('mouseenter', () => playSound('hover-sound'));
-    link.addEventListener('click', () => playSound('click-sound'));
-});
-        });
+        function redirectTo(url) {
+            // Переход на страницу загрузки
+            window.location.href = 'loading.html?redirect=' + encodeURIComponent(url);
+        }
+
+        window.onload = typeCode;
     </script>
-</body>
-</html>
+
+
+
+</body></html>
