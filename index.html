@@ -142,8 +142,8 @@
         </div>
     </div>
 
-    <audio id="click-sound" src="click.mp3"></audio>
-    <audio id="hover-sound" src="hover.mp3"></audio>
+    <audio id="click-sound" src="open.wav"></audio>
+    <audio id="hover-sound" src="select.wav"></audio>
 
     <script>
         function playSound(soundId) {
@@ -152,9 +152,10 @@
             sound.play();
         }
 
-        document.querySelectorAll('.links a').forEach(link => {
-            link.addEventListener('mouseenter', () => playSound('select.wav'));
-            link.addEventListener('click', () => playSound('open.wav'));
+document.querySelectorAll('.links a').forEach(link => {
+    link.addEventListener('mouseenter', () => playSound('hover-sound'));
+    link.addEventListener('click', () => playSound('click-sound'));
+});
         });
     </script>
 </body>
