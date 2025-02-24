@@ -33,6 +33,24 @@
             100% { text-shadow: 0px 0px #00ff00, 0px 0px #ff00ff; }
         }
 
+        @keyframes code-flow {
+            from { background-position: 0 0; }
+            to { background-position: 0 100%; }
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/circuit-board.png');
+            opacity: 0.3;
+            z-index: 0;
+            animation: code-flow 10s linear infinite;
+        }
+
         .bio-container {
             background: rgba(0, 255, 0, 0.1);
             padding: 20px;
@@ -115,36 +133,28 @@
         <h1>Ryan Reynolds (aka Scav4eg)</h1>
         <p>Привет! Я ебарь мам!</p>
         <div class="links">
-            <a href="#" onclick="redirectTo('https://steamcommunity.com/id/RyanReyno1ds/')">Steam</a>
-            <a href="#" onclick="redirectTo('https://t.me/Gleb4eg1337')">Telegram</a>
-            <a href="#" onclick="redirectTo('https://youtube.com/@Scav4eg')">YouTube</a>
-            <a href="#" onclick="redirectTo('terminal.html')">Terminal</a>
-            <a href="#" onclick="redirectTo('https://www.twitch.tv/scav4eg')">Twitch</a>
-            <a href="#" onclick="redirectTo('https://webchat-chvw.onrender.com')">WebChat</a>
+            <a href="https://steamcommunity.com/id/RyanReyno1ds/">Steam</a>
+            <a href="https://t.me/Gleb4eg1337">Telegram</a>
+            <a href="https://youtube.com/@Scav4eg">YouTube</a>
+            <a href="terminal.html">Terminal</a>
+            <a href="https://www.twitch.tv/scav4eg">Twitch</a>
+            <a href="https://webchat-chvw.onrender.com">WebChat</a>
         </div>
     </div>
 
-    <!-- Аудиофайлы -->
-    <audio id="click-sound" src="https://assets.mixkit.co/active_storage/sfx/872/872-preview.mp3"></audio>
-    <audio id="hover-sound" src="https://assets.mixkit.co/active_storage/sfx/869/869-preview.mp3"></audio>
+    <audio id="click-sound" src="click.mp3"></audio>
+    <audio id="hover-sound" src="hover.mp3"></audio>
 
     <script>
         function playSound(soundId) {
             const sound = document.getElementById(soundId);
-            sound.currentTime = 0; // Чтобы звук начинался заново
+            sound.currentTime = 0;
             sound.play();
         }
 
-        function redirectTo(url) {
-            playSound('click-sound');
-            setTimeout(() => {
-                window.location.href = 'loading.html?redirect=' + encodeURIComponent(url);
-            }, 300); // Имитация задержки
-        }
-
         document.querySelectorAll('.links a').forEach(link => {
-            link.addEventListener('mouseenter', () => playSound('hover-sound'));
-            link.addEventListener('click', () => playSound('click-sound'));
+            link.addEventListener('mouseenter', () => playSound('select.wav'));
+            link.addEventListener('click', () => playSound('open.wav'));
         });
     </script>
 </body>
