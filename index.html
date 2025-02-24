@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
+<html lang="ru"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная страница</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -143,7 +141,58 @@
     </style>
 </head>
 <body>
-    <div class="background" id="code-background"></div>
+    <div class="background" id="code-background">class AuthService {
+    public boolean authenticateUser(String username, String password) {
+        User user = database.findUser(username);
+        if (user != null &amp;&amp; user.checkPassword(password)) {
+            createSession(user);
+            return true;
+        }
+        return false;
+    }
+
+    private void createSession(User user) {
+        Session session = new Session(user);
+        session.setExpirationTime(System.currentTimeMillis() + 3600000);
+        sessionManager.addSession(session);
+    }
+}
+
+class User {
+    private String username;
+    private String passwordHash;
+
+    public boolean checkPassword(String password) {
+        return PasswordUtil.verifyHash(password, this.passwordHash);
+    }
+}
+
+public class LoginController {
+    private AuthService authService;
+
+    public LoginController() {
+        this.authService = new AuthService();
+    }
+
+    public void login(String username, String password) {
+        boolean success = authService.authenticateUser(username, password);
+        if (success) {
+            System.out.println("ACCESS GRANTED");
+        } else {
+            System.out.println("ACCESS DENIED");
+        }
+    }
+}
+
+public class SessionKeyGenerator {
+    public static String generateKey() {
+        return UUID.randomUUID().toString();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LoginController l</div>
     
     <div class="bio-container">
         <div class="avatar">
@@ -155,8 +204,8 @@
             <a href="#" onclick="redirectTo('https://steamcommunity.com/id/RyanReyno1ds/')">Steam</a>
             <a href="#" onclick="redirectTo('https://t.me/Bababoeey1337')">Telegram</a>
             <a href="#" onclick="redirectTo('https://youtube.com/@Scav4eg')">YouTube</a>
-            <a href="#" onclick="redirectTo('https://www.twitch.tv/scav4eg')">Twitch</a>
-        </div>
+            
+        <a href="#" onclick="redirectTo('terminal.html')">Terminal</a><a href="#" onclick="redirectTo('https://www.twitch.tv/scav4eg')">Twitch</a><a href="#" onclick="redirectTo('https://www.webchat-chvw.onrender.com')">WebChat</a></div>
     </div>
 
     <script>
@@ -251,5 +300,6 @@
         window.onload = typeCode;
     </script>
 
-</body>
-</html>
+
+
+</body></html>
