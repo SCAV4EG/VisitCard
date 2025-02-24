@@ -23,22 +23,14 @@
             margin-bottom: 20px; /* Отступ для загрузочной панели */
         }
 
-        .loader {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            position: relative;
-            width: 100%;
-            max-width: 400px; /* Ограничение ширины панели */
-        }
-
-        .square {
-            width: 40px;
-            height: 40px;
-            margin: 0 5px;
-            background: #00ff00;
-            animation: loading 1s infinite;
+        .progress {
+            display: inline-block;
+            font-size: 35px;
+            color: #00ff00;
+            background: #000000;
+            border-radius: 50px;
+            padding: 1px 15px;
+            margin-top: 20px; /* Отступ для текста прогресса */
         }
 
         /* Анимация для загрузки */
@@ -55,16 +47,6 @@
                 transform: scale(1);
                 opacity: 1;
             }
-        }
-
-        .progress {
-            display: inline-block;
-            font-size: 35px;
-            color: #00ff00;
-            background: #000000;
-            border-radius: 50px;
-            padding: 1px 15px;
-            margin-top: 20px; /* Отступ для текста прогресса */
         }
     </style>
 </head>
@@ -89,17 +71,30 @@
             if (completedSquares >= totalSquares) {
                 clearInterval(interval);
                 setTimeout(() => {
-                    // Задержка перед переходом
+                    // Запуск загрузки новой страницы
                     const urlParams = new URLSearchParams(window.location.search);
                     const redirectUrl = urlParams.get('redirect');
                     if (redirectUrl) {
-                        window.location.href = redirectUrl; // Переход на другую страницу
+                        window.location.href = redirectUrl; // Переход на новую страницу
                     } else {
                         console.log('Redirect URL is not defined.');
                     }
                 }, 500);
             }
         }, totalDuration / totalSquares); // Частота обновления
+
+        // Запуск асинхронной загрузки страницы (имитация)
+        function loadPage() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve();  // Завершаем загрузку страницы через время
+                }, totalDuration); // Это время имитации загрузки страницы
+            });
+        }
+
+        loadPage().then(() => {
+            console.log("Страница загружена, можно делать редирект.");
+        });
     </script>
 </body>
 </html>
