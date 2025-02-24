@@ -57,43 +57,49 @@
 
     <script>
         const totalSquares = 10; // Общее количество квадратов
-        const totalDuration = 5000; // Длительность загрузки в миллисекундах
+        const totalDuration = 5000; // Длительность загрузки в миллисекундах (имитация реальной загрузки)
         let completedSquares = 0;
 
         const progressElement = document.getElementById('progress');
 
-        const interval = setInterval(() => {
-            completedSquares++;
-            const progressPercentage = Math.round((completedSquares / totalSquares) * 100);
-            const filledSquares = '■'.repeat(completedSquares) + '□'.repeat(totalSquares - completedSquares);
+        // Функция, которая будет обновлять прогресс
+        const updateProgress = (percentage) => {
+            const progressPercentage = Math.round(percentage);
+            const filledSquares = '■'.repeat(Math.floor((percentage / 100) * totalSquares)) + '□'.repeat(totalSquares - Math.floor((percentage / 100) * totalSquares));
             progressElement.textContent = `${filledSquares} ${progressPercentage}%`;
+        };
 
-            if (completedSquares >= totalSquares) {
-                clearInterval(interval);
-                setTimeout(() => {
-                    // Запуск загрузки новой страницы
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const redirectUrl = urlParams.get('redirect');
-                    if (redirectUrl) {
-                        window.location.href = redirectUrl; // Переход на новую страницу
-                    } else {
-                        console.log('Redirect URL is not defined.');
+        // Симуляция загрузки
+        const simulateLoading = () => {
+            return new Promise((resolve) => {
+                let startTime = Date.now();
+
+                // Обновляем прогресс каждую миллисекунду
+                let interval = setInterval(() => {
+                    let elapsedTime = Date.now() - startTime;
+                    let percentage = (elapsedTime / totalDuration) * 100;
+
+                    if (percentage >= 100) {
+                        percentage = 100; // Завершаем загрузку
+                        clearInterval(interval);
+                        resolve(); // Завершаем промис
                     }
-                }, 500);
-            }
-        }, totalDuration / totalSquares); // Частота обновления
 
-        // Запуск асинхронной загрузки страницы (имитация)
-        function loadPage() {
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    resolve();  // Завершаем загрузку страницы через время
-                }, totalDuration); // Это время имитации загрузки страницы
+                    updateProgress(percentage); // Обновляем отображение прогресса
+                }, 100); // Обновляем каждую сотую долю секунды (0.1 сек)
             });
-        }
+        };
 
-        loadPage().then(() => {
-            console.log("Страница загружена, можно делать редирект.");
+        // Запускаем загрузку
+        simulateLoading().then(() => {
+            // После окончания загрузки, делаем редирект
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectUrl = urlParams.get('redirect');
+            if (redirectUrl) {
+                window.location.href = redirectUrl; // Переход на новую страницу
+            } else {
+                console.log('Redirect URL is not defined.');
+            }
         });
     </script>
 </body>
