@@ -89,9 +89,14 @@
             if (completedSquares >= totalSquares) {
                 clearInterval(interval);
                 setTimeout(() => {
+                    // Задержка перед переходом
                     const urlParams = new URLSearchParams(window.location.search);
                     const redirectUrl = urlParams.get('redirect');
-                    window.location.href = redirectUrl; // Переход
+                    if (redirectUrl) {
+                        window.location.href = redirectUrl; // Переход на другую страницу
+                    } else {
+                        console.log('Redirect URL is not defined.');
+                    }
                 }, 500);
             }
         }, totalDuration / totalSquares); // Частота обновления
