@@ -141,59 +141,6 @@
     </style>
 </head>
 <body>
-    <div class="background" id="code-background">class AuthService {
-    public boolean authenticateUser(String username, String password) {
-        User user = database.findUser(username);
-        if (user != null &amp;&amp; user.checkPassword(password)) {
-            createSession(user);
-            return true;
-        }
-        return false;
-    }
-
-    private void createSession(User user) {
-        Session session = new Session(user);
-        session.setExpirationTime(System.currentTimeMillis() + 3600000);
-        sessionManager.addSession(session);
-    }
-}
-
-class User {
-    private String username;
-    private String passwordHash;
-
-    public boolean checkPassword(String password) {
-        return PasswordUtil.verifyHash(password, this.passwordHash);
-    }
-}
-
-public class LoginController {
-    private AuthService authService;
-
-    public LoginController() {
-        this.authService = new AuthService();
-    }
-
-    public void login(String username, String password) {
-        boolean success = authService.authenticateUser(username, password);
-        if (success) {
-            System.out.println("ACCESS GRANTED");
-        } else {
-            System.out.println("ACCESS DENIED");
-        }
-    }
-}
-
-public class SessionKeyGenerator {
-    public static String generateKey() {
-        return UUID.randomUUID().toString();
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        LoginController l</div>
-    
     <div class="bio-container">
         <div class="avatar">
             <img src="https://avatars.akamai.steamstatic.com/b228a674e012a9207a72236cf8e0acefb024cacd_full.jpg" alt="Avatar">
@@ -210,89 +157,85 @@ public class Main {
     </div>
 
     <script>
-        const codeLines = [
-            "class AuthService {",
-            "    public boolean authenticateUser(String username, String password) {",
-            "        User user = database.findUser(username);",
-            "        if (user != null && user.checkPassword(password)) {",
-            "            createSession(user);",
-            "            return true;",
-            "        }",
-            "        return false;",
-            "    }",
-            "",
-            "    private void createSession(User user) {",
-            "        Session session = new Session(user);",
-            "        session.setExpirationTime(System.currentTimeMillis() + 3600000);",
-            "        sessionManager.addSession(session);",
-            "    }",
-            "}",
-            "",
-            "class User {",
-            "    private String username;",
-            "    private String passwordHash;",
-            "",
-            "    public boolean checkPassword(String password) {",
-            "        return PasswordUtil.verifyHash(password, this.passwordHash);",
-            "    }",
-            "}",
-            "",
-            "public class LoginController {",
-            "    private AuthService authService;",
-            "",
-            "    public LoginController() {",
-            "        this.authService = new AuthService();",
-            "    }",
-            "",
-            "    public void login(String username, String password) {",
-            "        boolean success = authService.authenticateUser(username, password);",
-            "        if (success) {",
-            "            System.out.println(\"ACCESS GRANTED\");",
-            "        } else {",
-            "            System.out.println(\"ACCESS DENIED\");",
-            "        }",
-            "    }",
-            "}",
-            "",
-            "public class SessionKeyGenerator {",
-            "    public static String generateKey() {",
-            "        return UUID.randomUUID().toString();",
-            "    }",
-            "}",
-            "",
-            "public class Main {",
-            "    public static void main(String[] args) {",
-            "        LoginController loginController = new LoginController();",
-            "        loginController.login(\"Scav4eg\", \"SuperSecretPassword\");",
-            "    }",
-            "}"
-        ];
+const codeLines = [
+    "class AuthService {",
+    "    public boolean authenticateUser(String username, String password) {",
+    "        User user = database.findUser(username);",
+    "        if (user != null && user.checkPassword(password)) {",
+    "            createSession(user);",
+    "            return true;",
+    "        }",
+    "        return false;",
+    "    }",
+    "",
+    "    private void createSession(User user) {",
+    "        Session session = new Session(user);",
+    "        session.setExpirationTime(System.currentTimeMillis() + 3600000);",
+    "        sessionManager.addSession(session);",
+    "    }",
+    "}",
+    "",
+    "class User {",
+    "    private String username;",
+    "    private String passwordHash;",
+    "",
+    "    public boolean checkPassword(String password) {",
+    "        return PasswordUtil.verifyHash(password, this.passwordHash);",
+    "    }",
+    "}",
+    "",
+    "public class LoginController {",
+    "    private AuthService authService;",
+    "",
+    "    public LoginController() {",
+    "        this.authService = new AuthService();",
+    "    }",
+    "",
+    "    public void login(String username, String password) {",
+    "        boolean success = authService.authenticateUser(username, password);",
+    "        if (success) {",
+    "            System.out.println(\"ACCESS GRANTED\");",
+    "        } else {",
+    "            System.out.println(\"ACCESS DENIED\");",
+    "        }",
+    "    }",
+    "}",
+    "",
+    "public class SessionKeyGenerator {",
+    "    public static String generateKey() {",
+    "        return UUID.randomUUID().toString();",
+    "    }",
+    "}",
+    "",
+    "public class Main {",
+    "    public static void main(String[] args) {",
+    "        LoginController loginController = new LoginController();",
+    "        loginController.login(\"Scav4eg\", \"SuperSecretPassword\");",
+    "    }",
+    "}"
+];
 
-        let currentLine = 0;
-        let currentChar = 0;
-        const backgroundElement = document.getElementById('code-background');
+let currentLine = 0;
+let currentChar = 0;
+const backgroundElement = document.getElementById('code-background');
 
-        function typeCode() {
-            if (currentLine < codeLines.length) {
-                if (currentChar < codeLines[currentLine].length) {
-                    backgroundElement.textContent += codeLines[currentLine][currentChar];
-                    currentChar++;
-                } else {
-                    backgroundElement.textContent += '\n';
-                    currentLine++;
-                    currentChar = 0;
-                }
-                setTimeout(typeCode, 80); // Увеличенная скорость печати
-            } else {
-                setTimeout(() => {
-                    backgroundElement.textContent = ""; // Очистка экрана
-                    currentLine = 0;
-                    currentChar = 0;
-                    typeCode(); // Повторить анимацию
-                }, 2000); // Пауза перед повторением
-            }
+function typeCode() {
+    if (currentLine < codeLines.length) {
+        let line = codeLines[currentLine];
+        if (currentChar < line.length) {
+            backgroundElement.innerHTML += line[currentChar];
+            currentChar++;
+            setTimeout(typeCode, 20); // Скорость печати символов
+        } else {
+            backgroundElement.innerHTML += '<br>'; // Переход на новую строку
+            currentLine++;
+            currentChar = 0;
+            setTimeout(typeCode, 200); // Пауза между строками
         }
+    }
+}
 
+typeCode();
         function redirectTo(url) {
             // Переход на страницу загрузки
             window.location.href = 'loading.html?redirect=' + encodeURIComponent(url);
