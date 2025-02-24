@@ -130,12 +130,12 @@
             terminal.textContent += '\n- time: Display current time in Moscow, Russia';
             terminal.textContent += '\n- echo [message]: Display a message';
             terminal.textContent += '\n- myip: Display your IP address';
-            terminal.textContent += '\n- myfellos: Display list of friends';
+            terminal.textContent += '\n- myfellas: Display list of friends';
         } else if (command === 'time') {
             showTime();
         } else if (command === 'myip') {
             getMyIPAddress();
-        } else if (command === 'myfellos') {
+        } else if (command === 'myfellas') {
             showFriends();
         } else if (command.startsWith('echo ')) {
             echoMessage(command.slice(5));
@@ -170,7 +170,7 @@
     }
 
     function showFriends() {
-        terminal.textContent += '\nMy Friends:';
+        terminal.textContent += '\nMy environment:';
         terminal.innerHTML += `
             <button class="friend-button" onclick="openFriendPage('Глеб')">1. Глеб</button>
             <button class="friend-button" onclick="openFriendPage('Виталий')">2. Витя</button>
