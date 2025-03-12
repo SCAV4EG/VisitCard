@@ -7,11 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
         @keyframes glitch {
-            0% { text-shadow: 2px 2px #f96d00, -2px -2px #ff9a3c; }
-            25% { text-shadow: -2px -2px #f96d00, 2px 2px #ff9a3c; }
-            50% { text-shadow: 2px -2px #f96d00, -2px 2px #ff9a3c; }
-            75% { text-shadow: -2px 2px #f96d00, 2px -2px #ff9a3c; }
-            100% { text-shadow: 2px 2px #f96d00, -2px -2px #ff9a3c; }
+            0% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
+            25% { text-shadow: -4px -4px #f96d00, 4px 4px #ff9a3c; }
+            50% { text-shadow: 4px -4px #f96d00, -4px 4px #ff9a3c; }
+            75% { text-shadow: -4px 4px #f96d00, 4px -4px #ff9a3c; }
+            100% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
         }
 
         body {
@@ -23,23 +23,25 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            text-align: center;
+            text-align: left;
         }
 
         .container {
             position: relative;
+            transform: translateX(20%);
         }
 
         h1 {
-            font-size: 15rem;
+            font-size: 20rem;
             margin: 0;
             animation: glitch 1s infinite alternate;
-            letter-spacing: 10px;
+            letter-spacing: 15px;
         }
 
         p {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #ff9a3c;
+            margin-top: 20px;
         }
 
         .clock {
@@ -60,7 +62,7 @@
 <body>
     <div class="container">
         <h1>521</h1>
-        <p>Администратор недоступен.<br>Сайт под разработкой (Under Construction).</p>
+        <p>Sorry, the server is offline and under construction.</p>
     </div>
 
     <div class="clock" id="clock">00:00:00</div>
