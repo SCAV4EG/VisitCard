@@ -3,83 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error Pages</title>
+    <title>521 | Under Construction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px #f96d00, -2px -2px #ff9a3c; }
+            25% { text-shadow: -2px -2px #f96d00, 2px 2px #ff9a3c; }
+            50% { text-shadow: 2px -2px #f96d00, -2px 2px #ff9a3c; }
+            75% { text-shadow: -2px 2px #f96d00, 2px -2px #ff9a3c; }
+            100% { text-shadow: 2px 2px #f96d00, -2px -2px #ff9a3c; }
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #1a1a2e;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000;
             color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-        }
-        .container {
             text-align: center;
         }
+
+        .container {
+            position: relative;
+        }
+
         h1 {
-            font-size: 10rem;
+            font-size: 15rem;
             margin: 0;
+            animation: glitch 1s infinite alternate;
+            letter-spacing: 10px;
         }
+
         p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #ff9a3c;
         }
-        .btn {
+
+        .clock {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            font-size: 3rem;
+            background: #000;
+            color: #f96d00;
+            border: 5px solid #f96d00;
             padding: 10px 20px;
-            font-size: 1rem;
-            color: #1a1a2e;
-            background-color: #f96d00;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .btn:hover {
-            background-color: #ff9a3c;
-        }
-        img {
-            max-width: 300px;
-            margin-bottom: 2rem;
+            border-radius: 8px;
+            letter-spacing: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="container" id="error-page">
-        <!-- Error content will be injected here -->
+    <div class="container">
+        <h1>521</h1>
+        <p>Администратор недоступен.<br>Сайт под разработкой (Under Construction).</p>
     </div>
 
+    <div class="clock" id="clock">00:00:00</div>
+
     <script>
-        const errorPages = {
-            404: {
-                image: 'https://i.imgur.com/qIufhof.png',
-                title: '404',
-                message: 'Oops! Looks like you're lost in space.',
-                buttonText: 'Go Home',
-                buttonLink: '/'
-            },
-            521: {
-                image: 'https://i.imgur.com/3suxlvm.png',
-                title: '521',
-                message: 'The server is taking a nap.',
-                buttonText: 'Try Again',
-                buttonLink: '/'
-            }
-        };
-
-        // Get the error code from URL (?code=404)
-        const params = new URLSearchParams(window.location.search);
-        const errorCode = params.get('code') || '404';
-
-        const errorContent = errorPages[errorCode] || errorPages['404'];
-
-        document.getElementById('error-page').innerHTML = `
-            <img src="${errorContent.image}" alt="Error image">
-            <h1>${errorContent.title}</h1>
-            <p>${errorContent.message}</p>
-            <a class="btn" href="${errorContent.buttonLink}">${errorContent.buttonText}</a>
-        `;
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
 </body>
 </html>
