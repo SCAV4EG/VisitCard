@@ -1,9 +1,9 @@
-<html lang="en">
-<head>
+<html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>521 | Under Construction</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="image/icon/ERROR.png">
   <style>
     @keyframes glitch {
       0% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
@@ -11,6 +11,30 @@
       50% { text-shadow: 4px -4px #f96d00, -4px 4px #ff9a3c; }
       75% { text-shadow: -4px 4px #f96d00, 4px -4px #ff9a3c; }
       100% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
+    }
+
+    @keyframes floatC {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(-20deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+
+    @keyframes floatS {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(20px) rotate(20deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+
+    @keyframes floatE {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(-10deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+
+    @keyframes floatM {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(25px) rotate(-25deg); }
+      100% { transform: translateY(0) rotate(0deg); }
     }
 
     body {
@@ -43,7 +67,7 @@
         #f96d00 96%,
         #000 96%
       );
-      background-size: 200% 100%; /* Размер фона больше для более детализированного вида */
+      background-size: 200% 100%;
       color: #fff;
       display: flex;
       justify-content: center;
@@ -57,6 +81,43 @@
     .container {
       position: relative;
       z-index: 2;
+    }
+
+    .letters {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      top: 50px;
+      width: 100%;
+      z-index: 3;
+    }
+
+    .letter {
+      font-size: 10rem;
+      font-weight: bold;
+      animation: glitch 1s infinite alternate, float 2s ease-in-out infinite;
+      margin: 0 20px;
+      position: relative;
+    }
+
+    .C {
+      color: red;
+      animation: floatC 2s ease-in-out infinite;
+    }
+
+    .S {
+      color: blue;
+      animation: floatS 2s ease-in-out infinite;
+    }
+
+    .E {
+      color: white;
+      animation: floatE 2s ease-in-out infinite;
+    }
+
+    .M {
+      color: black;
+      animation: floatM 2s ease-in-out infinite;
     }
 
     h1 {
@@ -89,13 +150,20 @@
   </style>
 </head>
 <body>
+  <div class="letters">
+    <div class="letter C">C</div>
+    <div class="letter S">S</div>
+    <div class="letter E">E</div>
+    <div class="letter M">M</div>
+  </div>
+
   <div class="container">
     <h1>521</h1>
     <p>Sorry, the server is offline and under construction.</p>
   </div>
 
-  <div class="clock" id="clock">21:46:19</div>
-  
+  <div class="clock" id="clock">23:26:51</div>
+
   <script>
     // Обновление часов
     function updateClock() {
@@ -109,5 +177,5 @@
     updateClock();
   </script>
 
-</body>
-</html>
+
+</body></html>
