@@ -1,82 +1,113 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>521 | Under Construction</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-    <style>
-        @keyframes glitch {
-            0% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
-            25% { text-shadow: -4px -4px #f96d00, 4px 4px #ff9a3c; }
-            50% { text-shadow: 4px -4px #f96d00, -4px 4px #ff9a3c; }
-            75% { text-shadow: -4px 4px #f96d00, 4px -4px #ff9a3c; }
-            100% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>521 | Under Construction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+    @keyframes glitch {
+      0% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
+      25% { text-shadow: -4px -4px #f96d00, 4px 4px #ff9a3c; }
+      50% { text-shadow: 4px -4px #f96d00, -4px 4px #ff9a3c; }
+      75% { text-shadow: -4px 4px #f96d00, 4px -4px #ff9a3c; }
+      100% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
+    }
 
-        body {
-            font-family: 'Orbitron', sans-serif;
-            background-color: #000;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: left;
-        }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: repeating-linear-gradient(
+        45deg,
+        #000 0%, 
+        #000 8%, 
+        #f96d00 8%, 
+        #f96d00 16%,
+        #000 16%,
+        #000 24%,
+        #f96d00 24%,
+        #f96d00 32%,
+        #000 32%,
+        #000 40%,
+        #f96d00 40%,
+        #f96d00 48%,
+        #000 48%,
+        #000 56%,
+        #f96d00 56%,
+        #f96d00 64%,
+        #000 64%,
+        #000 72%,
+        #f96d00 72%,
+        #f96d00 80%,
+        #000 80%,
+        #000 88%,
+        #f96d00 88%,
+        #f96d00 96%,
+        #000 96%
+      );
+      background-size: 200% 100%; /* Размер фона больше для более детализированного вида */
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      position: relative;
+      text-align: center;
+    }
 
-        .container {
-            position: relative;
-            transform: translateX(20%);
-        }
+    .container {
+      position: relative;
+      z-index: 2;
+    }
 
-        h1 {
-            font-size: 20rem;
-            margin: 0;
-            animation: glitch 1s infinite alternate;
-            letter-spacing: 15px;
-        }
+    h1 {
+      font-size: 20rem;
+      margin: 0;
+      animation: glitch 1s infinite alternate;
+      letter-spacing: 15px;
+    }
 
-        p {
-            font-size: 2.5rem;
-            color: #ff9a3c;
-            margin-top: 20px;
-        }
+    p {
+      font-size: 2.5rem;
+      color: #ff9a3c;
+      margin-top: 20px;
+    }
 
-        .clock {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            font-size: 3rem;
-            background: #000;
-            color: #f96d00;
-            border: 5px solid #f96d00;
-            padding: 10px 20px;
-            border-radius: 8px;
-            letter-spacing: 5px;
-        }
-    </style>
+    .clock {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      font-size: 3rem;
+      background: #000;
+      color: #f96d00;
+      border: 5px solid #f96d00;
+      padding: 10px 20px;
+      border-radius: 8px;
+      letter-spacing: 5px;
+    }
+
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>521</h1>
-        <p>Sorry, the server is offline and under construction.</p>
-    </div>
+  <div class="container">
+    <h1>521</h1>
+    <p>Sorry, the server is offline and under construction.</p>
+  </div>
 
-    <div class="clock" id="clock">00:00:00</div>
+  <div class="clock" id="clock">21:46:19</div>
+  
+  <script>
+    // Обновление часов
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
 
-    <script>
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
 </body>
 </html>
