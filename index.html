@@ -1,8 +1,10 @@
-<html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>521 | Under Construction</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="images/icons/ERROR.png">
   <style>
     @keyframes glitch {
@@ -74,77 +76,68 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      position: relative;
       text-align: center;
     }
 
     .container {
       position: relative;
       z-index: 2;
+      padding: 0 5%;
     }
 
     .letters {
       display: flex;
       justify-content: center;
       position: absolute;
-      top: 50px;
+      top: 10%;
       width: 100%;
       z-index: 3;
+      gap: 5vw;
     }
 
     .letter {
-      font-size: 10rem;
+      font-size: 15vw;
       font-weight: bold;
-      animation: glitch 1s infinite alternate, float 2s ease-in-out infinite;
-      margin: 0 20px;
-      position: relative;
+      animation: glitch 1s infinite alternate;
+      margin: 0;
     }
 
-    .C {
-      color: red;
-      animation: floatC 2s ease-in-out infinite;
-    }
-
-    .S {
-      color: blue;
-      animation: floatS 2s ease-in-out infinite;
-    }
-
-    .E {
-      color: white;
-      animation: floatE 2s ease-in-out infinite;
-    }
-
-    .M {
-      color: black;
-      animation: floatM 2s ease-in-out infinite;
-    }
+    .C { color: red; animation: floatC 2s ease-in-out infinite; }
+    .S { color: blue; animation: floatS 2s ease-in-out infinite; }
+    .E { color: white; animation: floatE 2s ease-in-out infinite; }
+    .M { color: black; animation: floatM 2s ease-in-out infinite; }
 
     h1 {
-      font-size: 20rem;
+      font-size: 25vw;
       margin: 0;
       animation: glitch 1s infinite alternate;
-      letter-spacing: 15px;
+      letter-spacing: 1vw;
     }
 
     p {
-      font-size: 2.5rem;
+      font-size: 5vw;
       color: #ff9a3c;
-      margin-top: 20px;
+      margin-top: 5%;
     }
 
     .clock {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      font-size: 3rem;
+      bottom: 5%;
+      right: 5%;
+      font-size: 5vw;
       background: #000;
       color: #f96d00;
-      border: 5px solid #f96d00;
-      padding: 10px 20px;
-      border-radius: 8px;
-      letter-spacing: 5px;
+      border: 0.5vw solid #f96d00;
+      padding: 2vw 4vw;
+      border-radius: 1vw;
+      letter-spacing: 0.5vw;
+    }
+
+    @media (min-width: 768px) {
+      .letter { font-size: 10rem; }
+      h1 { font-size: 20rem; }
+      p { font-size: 2.5rem; }
+      .clock { font-size: 3rem; padding: 10px 20px; }
     }
 
   </style>
@@ -162,10 +155,9 @@
     <p>Sorry, the server is offline and under construction.</p>
   </div>
 
-  <div class="clock" id="clock">23:26:51</div>
+  <div class="clock" id="clock">00:00:00</div>
 
   <script>
-    // Обновление часов
     function updateClock() {
       const now = new Date();
       const hours = String(now.getHours()).padStart(2, '0');
@@ -176,6 +168,5 @@
     setInterval(updateClock, 1000);
     updateClock();
   </script>
-
-
-</body></html>
+</body>
+</html>
