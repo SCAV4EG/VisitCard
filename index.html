@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>521 | Under Construction</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="images/icons/ERROR.png">
   <style>
     @keyframes glitch {
@@ -120,18 +118,23 @@
       margin-top: 5%;
     }
 
-    .clock {
+      .clock {
       position: fixed;
-      bottom: 5%;
-      right: 5%;
-      font-size: 5vw;
+      bottom: 20px;
+      right: 20px; /* сдвинули чуть левее */
+      font-size: 3rem;
       background: #000;
       color: #f96d00;
-      border: 0.5vw solid #f96d00;
-      padding: 2vw 4vw;
-      border-radius: 1vw;
-      letter-spacing: 0.5vw;
+      border: 5px solid #f96d00;
+      padding: 10px 40px; /* увеличил правый отступ */
+      border-radius: 8px;
+      letter-spacing: 5px;
+      font-family: 'Orbitron', sans-serif;
+      width: 350px; /* добавил ширину справа */
+      text-align: center;
+      box-sizing: border-box;
     }
+
 
     @media (min-width: 768px) {
       .letter { font-size: 10rem; }
@@ -155,7 +158,7 @@
     <p>Sorry, the server is offline and under construction.</p>
   </div>
 
-  <div class="clock" id="clock">00:00:00</div>
+  <div class="clock" id="clock">20:16:50</div>
 
   <script>
     function updateClock() {
@@ -168,5 +171,6 @@
     setInterval(updateClock, 1000);
     updateClock();
   </script>
-</body>
-</html>
+
+
+</body></html>
