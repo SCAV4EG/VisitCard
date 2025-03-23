@@ -1,11 +1,12 @@
-<html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>521 | Under Construction</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="images/icons/ERROR.png">
   <style>
-    /* Анимация для глитч-эффекта */
     @keyframes glitch {
       0% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
       25% { text-shadow: -4px -4px #f96d00, 4px 4px #ff9a3c; }
@@ -14,61 +15,10 @@
       100% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
     }
 
-    /* Анимации для движущихся объектов */
-    @keyframes floatC {
-      0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-15px) rotate(-20deg); }
-      100% { transform: translateY(0) rotate(0deg); }
-    }
-
-    @keyframes floatS {
-      0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(20px) rotate(20deg); }
-      100% { transform: translateY(0) rotate(0deg); }
-    }
-
-    @keyframes floatE {
-      0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-10px) rotate(-10deg); }
-      100% { transform: translateY(0) rotate(0deg); }
-    }
-
-    @keyframes floatM {
-      0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(25px) rotate(-25deg); }
-      100% { transform: translateY(0) rotate(0deg); }
-    }
-
-    /* Основной стиль */
     body {
       font-family: 'Orbitron', sans-serif;
       background: repeating-linear-gradient(
-        45deg,
-        #000 0%, 
-        #000 8%, 
-        #f96d00 8%, 
-        #f96d00 16%,
-        #000 16%,
-        #000 24%,
-        #f96d00 24%,
-        #f96d00 32%,
-        #000 32%,
-        #000 40%,
-        #f96d00 40%,
-        #f96d00 48%,
-        #000 48%,
-        #000 56%,
-        #f96d00 56%,
-        #f96d00 64%,
-        #000 64%,
-        #000 72%,
-        #f96d00 72%,
-        #f96d00 80%,
-        #000 80%,
-        #000 88%,
-        #f96d00 88%,
-        #f96d00 96%,
-        #000 96%
+        45deg, #000 0%, #000 8%, #f96d00 8%, #f96d00 16%
       );
       background-size: 200% 100%;
       color: #fff;
@@ -86,28 +36,6 @@
       z-index: 2;
       padding: 0 5%;
     }
-
-    .letters {
-      display: flex;
-      justify-content: center;
-      position: absolute;
-      top: 10%;
-      width: 100%;
-      z-index: 3;
-      gap: 5vw;
-    }
-
-    .letter {
-      font-size: 15vw;
-      font-weight: bold;
-      animation: glitch 1s infinite alternate;
-      margin: 0;
-    }
-
-    .C { color: red; animation: floatC 2s ease-in-out infinite; }
-    .S { color: blue; animation: floatS 2s ease-in-out infinite; }
-    .E { color: white; animation: floatE 2s ease-in-out infinite; }
-    .M { color: black; animation: floatM 2s ease-in-out infinite; }
 
     h1 {
       font-size: 25vw;
@@ -139,50 +67,16 @@
       box-sizing: border-box;
     }
 
-    /* Летающий логотип */
-    .flying-logo {
-      position: absolute;
-      top: -150px;
-      left: -150px;
-      width: 200px;
-      animation: flyLogo 20s infinite linear;
-      z-index: -1;
-    }
-
-    @keyframes flyLogo {
-      0% { top: -150px; left: -150px; }
-      25% { top: 10vh; left: 80%; }
-      50% { top: 70vh; left: 10%; }
-      75% { top: 80%; left: 70%; }
-      100% { top: -150px; left: -150px; }
-    }
-
-    @media (min-width: 768px) {
-      .letter { font-size: 10rem; }
-      h1 { font-size: 20rem; }
-      p { font-size: 2.5rem; }
-      .clock { font-size: 3rem; padding: 10px 20px; }
-    }
-
   </style>
 </head>
 <body>
-  <!-- Летающий логотип -->
-  <img src="images/icons/logo.png" alt="Flying Logo" class="flying-logo">
-
-  <div class="letters">
-    <div class="letter C">C</div>
-    <div class="letter S">S</div>
-    <div class="letter E">E</div>
-    <div class="letter M">M</div>
-  </div>
 
   <div class="container">
     <h1>521</h1>
     <p>Sorry, the server is offline and under construction.</p>
   </div>
 
-  <div class="clock" id="clock">21:53:08</div>
+  <div class="clock" id="clock">00:00:00</div>
 
   <script>
     function updateClock() {
@@ -190,12 +84,11 @@
       const hours = String(now.getHours()).padStart(2, '0');
       const minutes = String(now.getMinutes()).padStart(2, '0');
       const seconds = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('clock').textContent = ${hours}:${minutes}:${seconds};
+      document.getElementById('clock').textContent = hours + ":" + minutes + ":" + seconds;
     }
     setInterval(updateClock, 1000);
     updateClock();
   </script>
 
-
-
-</body></html>
+</body>
+</html>
