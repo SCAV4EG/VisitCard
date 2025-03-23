@@ -7,20 +7,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="images/icons/ERROR.png">
   <style>
-    @keyframes glitch {
-      0% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
-      25% { text-shadow: -4px -4px #f96d00, 4px 4px #ff9a3c; }
-      50% { text-shadow: 4px -4px #f96d00, -4px 4px #ff9a3c; }
-      75% { text-shadow: -4px 4px #f96d00, 4px -4px #ff9a3c; }
-      100% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
-    }
-
     body {
       font-family: 'Orbitron', sans-serif;
-      background: repeating-linear-gradient(
-        45deg, #000 0%, #000 8%, #f96d00 8%, #f96d00 16%
-      );
-      background-size: 200% 100%;
+      background: #000;
       color: #fff;
       display: flex;
       justify-content: center;
@@ -34,14 +23,12 @@
     .container {
       position: relative;
       z-index: 2;
-      padding: 0 5%;
     }
 
     h1 {
       font-size: 25vw;
       margin: 0;
-      animation: glitch 1s infinite alternate;
-      letter-spacing: 1vw;
+      text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c;
     }
 
     p {
@@ -67,9 +54,39 @@
       box-sizing: border-box;
     }
 
+    /* Логотип в правом верхнем углу */
+    .logo-top-right {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      width: 100px;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .logo-top-right:hover {
+      opacity: 1;
+    }
+
+    /* Бегущая строка */
+    .scrolling-logo {
+      position: fixed;
+      bottom: 10px;
+      width: 150px;
+      animation: scrollLogo 10s linear infinite;
+    }
+
+    @keyframes scrollLogo {
+      0% { left: -200px; }
+      100% { left: 100%; }
+    }
+
   </style>
 </head>
 <body>
+
+  <!-- Логотип в правом верхнем углу -->
+  <img src="images/icons/logo.png" alt="Logo" class="logo-top-right">
 
   <div class="container">
     <h1>521</h1>
@@ -78,13 +95,16 @@
 
   <div class="clock" id="clock">00:00:00</div>
 
+  <!-- Логотип в виде бегущей строки -->
+  <img src="images/icons/logo.png" alt="Scrolling Logo" class="scrolling-logo">
+
   <script>
     function updateClock() {
       const now = new Date();
       const hours = String(now.getHours()).padStart(2, '0');
       const minutes = String(now.getMinutes()).padStart(2, '0');
       const seconds = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('clock').textContent = hours + ":" + minutes + ":" + seconds;
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
     }
     setInterval(updateClock, 1000);
     updateClock();
