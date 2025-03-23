@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSEM — Digital Creations</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: black;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+        }
+
+        /* ============ HEADER ============ */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .navbar img {
+            height: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 12px;
+            border: 2px solid red;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: red;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons a img {
+            width: 30px;
+            height: 30px;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover img {
+            transform: scale(1.2);
+        }
+
+        /* Глитч-анимация */
+        .glitch {
+            font-size: 3rem;
+            position: relative;
+            display: inline-block;
+            color: red;
+            text-shadow: 3px 0px 5px rgba(255, 0, 0, 0.8);
+            animation: glitch 0.5s infinite alternate;
+            margin-top: 100px;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: -3px 0px 5px rgba(255, 0, 0, 0.8); }
+            100% { text-shadow: 3px 0px 5px rgba(255, 0, 0, 0.8); }
+        }
+
+        /* Контент */
+        section {
+            padding: 100px 20px;
+        }
+
+        .project-card {
+            background: #222;
+            color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            transition: transform 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+        }
+
+        .visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        footer {
+            padding: 20px;
+            background: #111;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Верхняя панель -->
+    <div class="navbar">
+        <img src="images/icons/logo.png" alt="CSEM Logo">
+        <div class="nav-links">
+            <a href="#about">О нас</a>
+            <a href="#projects">Проекты</a>
+            <a href="#contact">Контакты</a>
+        </div>
+        <div class="social-icons">
+            <a href="https://twitch.tv/" target="_blank"><img src="images/icons/twitch.png" alt="Twitch"></a>
+            <a href="https://youtube.com/" target="_blank"><img src="images/icons/youtube.png" alt="YouTube"></a>
+            <a href="https://t.me/" target="_blank"><img src="images/icons/telegram.png" alt="Telegram"></a>
+        </div>
+    </div>
+
+    <header>
+        <h1 class="glitch" data-glitch="CSEM — Digital Creations">CSEM — Digital Creations</h1>
+    </header>
+
+    <section id="about">
+        <h2>О нас</h2>
+        <p>Мы создаем игры, софт и цифровой контент.</p>
+    </section>
+
+    <section id="projects">
+        <h2>Наши проекты</h2>
+        <div class="project-card">Проект 1</div>
+        <div class="project-card">Проект 2</div>
+    </section>
+
+    <section id="contact">
+        <h2>Контакты</h2>
+        <p>Почта: <a href="mailto:support@csem.su">support@csem.su</a></p>
+    </section>
+
+    <footer>
+        © CSEM — Digital Creations, 2024
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const elements = document.querySelectorAll(".project-card");
+            function checkScroll() {
+                elements.forEach((el) => {
+                    if (el.getBoundingClientRect().top < window.innerHeight - 50) {
+                        el.classList.add("visible");
+                    }
+                });
+            }
+            window.addEventListener("scroll", checkScroll);
+            checkScroll();
+        });
+    </script>
+
+
+
+</body></html>
