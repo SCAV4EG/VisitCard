@@ -4,12 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>521 | Under Construction</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="images/icons/ERROR.png">
   <style>
+    @keyframes glitch {
+      0% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
+      25% { text-shadow: -4px -4px #f96d00, 4px 4px #ff9a3c; }
+      50% { text-shadow: 4px -4px #f96d00, -4px 4px #ff9a3c; }
+      75% { text-shadow: -4px 4px #f96d00, 4px -4px #ff9a3c; }
+      100% { text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c; }
+    }
+
+    /* Фон с полосками */
     body {
       font-family: 'Orbitron', sans-serif;
-      background: #000;
+      background: repeating-linear-gradient(
+        45deg,
+        #000 0%, #000 8%, #f96d00 8%, #f96d00 16%,
+        #000 16%, #000 24%, #f96d00 24%, #f96d00 32%,
+        #000 32%, #000 40%, #f96d00 40%, #f96d00 48%,
+        #000 48%, #000 56%, #f96d00 56%, #f96d00 64%,
+        #000 64%, #000 72%, #f96d00 72%, #f96d00 80%,
+        #000 80%, #000 88%, #f96d00 88%, #f96d00 96%,
+        #000 96%
+      );
       color: #fff;
       display: flex;
       justify-content: center;
@@ -18,17 +36,47 @@
       margin: 0;
       text-align: center;
       position: relative;
+      overflow: hidden;
+    }
+
+    /* Бегущая строка с логотипом */
+    .marquee-container {
+      position: absolute;
+      top: 10px;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee {
+      display: inline-block;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ff9a3c;
+      animation: marquee 10s linear infinite;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+
+    .marquee img {
+      height: 50px;
+      vertical-align: middle;
+      margin-right: 20px;
     }
 
     .container {
-      position: relative;
       z-index: 2;
+      padding: 0 5%;
     }
 
     h1 {
       font-size: 25vw;
       margin: 0;
-      text-shadow: 4px 4px #f96d00, -4px -4px #ff9a3c;
+      animation: glitch 1s infinite alternate;
+      letter-spacing: 1vw;
     }
 
     p {
@@ -54,49 +102,26 @@
       box-sizing: border-box;
     }
 
-    /* Логотип в правом верхнем углу */
-    .logo-top-right {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      width: 100px;
-      opacity: 0.7;
-      transition: opacity 0.3s;
+    @media (min-width: 768px) {
+      h1 { font-size: 20rem; }
+      p { font-size: 2.5rem; }
+      .clock { font-size: 3rem; padding: 10px 20px; }
     }
-
-    .logo-top-right:hover {
-      opacity: 1;
-    }
-
-    /* Бегущая строка */
-    .scrolling-logo {
-      position: fixed;
-      bottom: 10px;
-      width: 150px;
-      animation: scrollLogo 10s linear infinite;
-    }
-
-    @keyframes scrollLogo {
-      0% { left: -200px; }
-      100% { left: 100%; }
-    }
-
   </style>
 </head>
 <body>
-
-  <!-- Логотип в правом верхнем углу -->
-  <img src="images/icons/logo.png" alt="Logo" class="logo-top-right">
+  <div class="marquee-container">
+    <div class="marquee">
+      <img src="images/icons/logo.png" alt="CSEM Logo"> SERVER UNDER CONSTRUCTION - PLEASE CHECK BACK LATER 
+    </div>
+  </div>
 
   <div class="container">
     <h1>521</h1>
     <p>Sorry, the server is offline and under construction.</p>
   </div>
 
-  <div class="clock" id="clock">00:00:00</div>
-
-  <!-- Логотип в виде бегущей строки -->
-  <img src="images/icons/logo.png" alt="Scrolling Logo" class="scrolling-logo">
+  <div class="clock" id="clock">21:53:08</div>
 
   <script>
     function updateClock() {
@@ -109,6 +134,5 @@
     setInterval(updateClock, 1000);
     updateClock();
   </script>
-
 </body>
 </html>
